@@ -28,5 +28,10 @@ RSpec.describe Coin, type: :model do
       penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
       expect(penny.evaluate_coin_values).to eq("penny")
     end
+
+    it 'can identify nickels' do
+      nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
+      expect(nickel.evaluate_coin_values).to eq("nickel")
+    end
   end
 end

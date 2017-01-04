@@ -10,7 +10,7 @@ COIN_STANDARDS = [
     "name" => "nickel",
     "weight" => 5.000,
     "diameter" => 0.835,
-    "thickness" => 1.950
+    "thickness" => 0.1625
   },
   {
     "name" => "dime",
@@ -35,6 +35,6 @@ class Coin < ApplicationRecord
           break
         end
       }
-
     end
+
 end
