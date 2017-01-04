@@ -1,3 +1,3 @@
 class Coin < ApplicationRecord
-  validates_presence_of :weight, :diameter
+  validates_presence_of :weight, :diameter, :thickness
 end

@@ -15,4 +15,9 @@ RSpec.describe Coin, type: :model do
     no_diameter = Coin.create(weight: 3.3, thickness: 4.4)
     expect(no_diameter).to_not be_valid
   end
+
+  it 'requires thickness attribute' do
+    no_thickness = Coin.create(weight: 1.2, diameter: 3.4)
+    expect(no_thickness).to_not be_valid
+  end
 end
