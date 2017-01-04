@@ -33,5 +33,10 @@ RSpec.describe Coin, type: :model do
       nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
       expect(nickel.evaluate_coin_values).to eq("nickel")
     end
+
+    it 'can identify dimes' do
+      dime = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
+      expect(dime.evaluate_coin_values).to eq("dime")
+    end
   end
 end
