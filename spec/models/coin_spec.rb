@@ -22,5 +22,11 @@ RSpec.describe Coin, type: :model do
       expect(no_thickness).to_not be_valid
     end
   end
-  
+
+  context 'identifies coin names by weight, diameter, and thickness attributes' do
+    it 'can identify pennies' do
+      penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
+      expect(penny.evaluate_coin_values).to eq("penny")
+    end
+  end
 end
