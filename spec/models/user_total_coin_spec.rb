@@ -14,4 +14,9 @@ RSpec.describe UserTotalCoin, type: :model do
     total_coins.dime
     expect(total_coins.dimes.length).to eq(1)
   end
+
+  it 'can add nickels' do
+    total_coins.nickel
+    expect(total_coins.nickels.length).to eq(1)
+  end
 end
