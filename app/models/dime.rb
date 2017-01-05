@@ -1,0 +1,2 @@
+class Dime < ApplicationRecord
+end

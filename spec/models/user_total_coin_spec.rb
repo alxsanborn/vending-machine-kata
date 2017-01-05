@@ -8,4 +8,8 @@ RSpec.describe UserTotalCoin, type: :model do
     total_coins.coins.push(coin_1, coin_2)
     expect(total_coins.coins).to include(coin_1, coin_2)
   end
+
+  it 'can calculate a total amount' do
+    
+  end
 end
