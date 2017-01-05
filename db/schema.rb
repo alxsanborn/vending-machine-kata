@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104161412) do
+ActiveRecord::Schema.define(version: 20170105211044) do
 
   create_table "coins", force: :cascade do |t|
     t.decimal  "weight"
     t.decimal  "diameter"
     t.decimal  "thickness"
+    t.integer  "user_total_coin_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["user_total_coin_id"], name: "index_coins_on_user_total_coin_id"
+  end
+
+  create_table "user_total_coins", force: :cascade do |t|
+    t.decimal  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
