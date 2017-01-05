@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105213828) do
+ActiveRecord::Schema.define(version: 20170105214213) do
 
   create_table "coins", force: :cascade do |t|
     t.decimal  "weight"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20170105213828) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["user_total_coin_id"], name: "index_coins_on_user_total_coin_id"
+  end
+
+  create_table "dimes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pennies", force: :cascade do |t|
