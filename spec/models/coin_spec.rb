@@ -23,26 +23,4 @@ RSpec.describe Coin, type: :model do
     end
   end
 
-  context 'identifies coin names by weight, diameter, and thickness attributes' do
-    it 'can identify pennies' do
-      penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
-      expect(penny.evaluate_coin_values).to eq("penny")
-    end
-
-    it 'can identify nickels' do
-      nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
-      expect(nickel.evaluate_coin_values).to eq("nickel")
-    end
-
-    it 'can identify dimes' do
-      dime = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
-      expect(dime.evaluate_coin_values).to eq("dime")
-    end
-
-    it 'can identify quarters' do
-      quarter = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
-      expect(quarter.evaluate_coin_values).to eq("quarter")
-    end
-  end
-
 end
