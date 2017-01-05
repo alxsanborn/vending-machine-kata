@@ -59,4 +59,14 @@ RSpec.describe UserTotalCoin, type: :model do
   it 'prompts a user to insert coin if no valid coins have yet been inserted' do
     expect(total_coins.user_message).to eq("INSERT COINS")
   end
+
+  it 'returns the value of coins that have been added if valid coins have been inserted' do
+    dime_1 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
+    quarter_1 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
+
+    total_coins.evaluate_coin_values(dime_1)
+    total_coins.evaluate_coin_values(quarter_1)
+
+    expect(total_coins.user_message).to eq(0.35)
+  end
 end
