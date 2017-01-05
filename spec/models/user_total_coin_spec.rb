@@ -55,4 +55,8 @@ RSpec.describe UserTotalCoin, type: :model do
 
         expect(total_coins.total).to eq(0.85)
   end
+
+  it 'prompts a user to insert coin if no valid coins have yet been inserted' do
+    expect(total_coins.user_message).to eq("INSERT COINS")
+  end
 end

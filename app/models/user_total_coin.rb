@@ -1,3 +1,5 @@
+require_relative 'concerns/user_messages.rb'
+
 COIN_STANDARDS = [
   {"name" => :penny,
   "weight" => 2.500,
@@ -27,6 +29,8 @@ class UserTotalCoin < ApplicationRecord
   has_many :dimes
   has_many :nickels
   has_many :quarters
+
+  include UserMessages
 
   def total
     ((self.dimes.length*0.1) + (self.nickels.length*0.05) + (self.quarters.length*0.25)).round(2)
