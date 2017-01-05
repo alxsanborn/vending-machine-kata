@@ -24,7 +24,6 @@ COIN_STANDARDS = [
 ]
 
 class UserTotalCoin < ApplicationRecord
-  has_many :coins
   has_many :dimes
   has_many :nickels
   has_many :quarters

@@ -16,10 +16,8 @@ ActiveRecord::Schema.define(version: 20170105214550) do
     t.decimal  "weight"
     t.decimal  "diameter"
     t.decimal  "thickness"
-    t.integer  "user_total_coin_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["user_total_coin_id"], name: "index_coins_on_user_total_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dimes", force: :cascade do |t|
