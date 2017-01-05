@@ -44,4 +44,5 @@ RSpec.describe Coin, type: :model do
       expect(quarter.evaluate_coin_values).to eq("quarter")
     end
   end
+
 end

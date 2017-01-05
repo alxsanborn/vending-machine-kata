@@ -1,2 +1,3 @@
 class Penny < ApplicationRecord
+
 end
