@@ -36,4 +36,10 @@ RSpec.describe UserTotalCoin, type: :model do
     total_coins.evaluate_coin_values(nickel)
     expect(total_coins.nickels.length).to eq(1)
   end
+
+  it 'can identify and add a quarter to a user`s total coins' do
+    quarter = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
+    total_coins.evaluate_coin_values(quarter)
+    expect(total_coins.quarters.length).to eq(1)
+  end
 end
