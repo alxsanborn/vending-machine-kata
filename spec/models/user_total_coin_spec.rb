@@ -79,4 +79,10 @@ RSpec.describe UserTotalCoin, type: :model do
    @total_coins.evaluate_coin_values(invalid_nickel)
    expect(@total_coins.user_message).to eq("INSERT COINS")
  end
+
+ it 'rejects objects with valid weight and diameter but invalid thickness' do
+   invalid_quarter = Coin.create(weight: 5.561, diameter: 0.955, thickness: 0.066)
+   @total_coins.evaluate_coin_values(invalid_quarter)
+   expect(@total_coins.user_message).to eq("INSERT COINS")
+end
 end
