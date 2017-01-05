@@ -1,0 +1,2 @@
+class Nickel < ApplicationRecord
+end
