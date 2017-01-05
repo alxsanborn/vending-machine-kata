@@ -24,4 +24,10 @@ RSpec.describe UserTotalCoin, type: :model do
     total_coins.quarter
     expect(total_coins.quarters.length).to eq(1)
   end
+
+  it 'can identify and add a dime to a user`s total coins' do
+    dime = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
+    total_coins.evaluate_coin_values(dime)
+    expect(total_coins.dimes.length).to eq(1)
+  end
 end
