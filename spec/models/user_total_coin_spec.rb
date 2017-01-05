@@ -19,4 +19,9 @@ RSpec.describe UserTotalCoin, type: :model do
     total_coins.nickel
     expect(total_coins.nickels.length).to eq(1)
   end
+
+  it 'can add quarters' do
+    total_coins.quarter
+    expect(total_coins.quarters.length).to eq(1)
+  end
 end
