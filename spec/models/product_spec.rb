@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
+
+  let (:coffee) {Product.create(name: "coffee", price: 1.00)}
+
   it 'can create a new product with name and price' do
-    coffee = Product.create(name: "coffee", price: 1.00)
     expect(coffee).to be_valid
   end
 
@@ -14,5 +16,10 @@ RSpec.describe Product, type: :model do
   it 'cannot be created without price' do
     free_cheetos = Product.create(name: 'cheetos')
     expect(free_cheetos).to_not be_valid
+  end
+
+  it 'user can select a product' do
+    coffee.selected = true
+    expect(coffee.selected).to be(true)
   end
 end
