@@ -8,6 +8,10 @@ RSpec.describe Product, type: :model do
     expect(coffee).to be_valid
   end
 
+  it 'selected attribute defaults to false' do
+    expect(coffee.selected).to be(false)
+  end
+
   it 'cannot be created without name' do
     product_1 = Product.create(price: 0.45)
     expect(product_1).to_not be_valid
