@@ -3,10 +3,16 @@ module UserMessages
     "INSERT COINS"
   end
 
-  def user_message
-    case self.total
-      when 0
+  def dispense_item
+    "THANK YOU"
+  end
+
+  def user_message(product = nil)
+    case
+    when self.total == 0
         insert_coins
+    when product != nil && self.total == product.price
+      dispense_item
       else
         self.value = self.total
         self.value

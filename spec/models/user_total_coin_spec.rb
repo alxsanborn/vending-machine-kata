@@ -10,6 +10,10 @@ RSpec.describe UserTotalCoin, type: :model do
     @quarter_2 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
     @nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
     @penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)
+
+    @cola = Product.create(name: "cola", price: 1.00)
+    @chips = Product.create(name: "chips", price: 0.50)
+    @candy = Product.create(name: "candy", price: 0.65)
   end
 
   it 'can add dimes' do
@@ -85,4 +89,10 @@ RSpec.describe UserTotalCoin, type: :model do
    @total_coins.evaluate_coin_values(invalid_quarter)
    expect(@total_coins.user_message).to eq("INSERT COINS")
 end
+
+  it 'thanks the user when a product has been successfully purchased' do
+    @total_coins.evaluate_coin_values(@quarter_1)
+    @total_coins.evaluate_coin_values(@quarter_2)
+    expect(@total_coins.user_message(@chips)).to eq("THANK YOU")
+  end
 end
