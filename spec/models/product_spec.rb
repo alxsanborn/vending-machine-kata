@@ -10,4 +10,9 @@ RSpec.describe Product, type: :model do
     product_1 = Product.create(price: 0.45)
     expect(product_1).to_not be_valid
   end
+
+  it 'cannot be created without price' do
+    free_cheetos = Product.create(name: 'cheetos')
+    expect(free_cheetos).to_not be_valid
+  end
 end
