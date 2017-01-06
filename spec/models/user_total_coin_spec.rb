@@ -93,6 +93,13 @@ end
   it 'thanks the user when a product has been successfully purchased' do
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
+    @chips.selected = true
     expect(@total_coins.user_message(@chips)).to eq("THANK YOU")
+  end
+
+  it 'does not dispense a product if product has not been selected' do
+    @total_coins.evaluate_coin_values(@quarter_1)
+    @total_coins.evaluate_coin_values(@quarter_2)
+    expect(@total_coins.user_message(@chips)).to eq(0.50)
   end
 end

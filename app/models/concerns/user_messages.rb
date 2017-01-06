@@ -11,7 +11,7 @@ module UserMessages
     case
     when self.total == 0
         insert_coins
-    when product != nil && self.total == product.price
+    when product != nil && self.total == product.price && product.selected == true
       dispense_item
       else
         self.value = self.total
