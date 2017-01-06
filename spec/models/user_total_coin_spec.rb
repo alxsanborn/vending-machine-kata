@@ -102,4 +102,10 @@ end
     @total_coins.evaluate_coin_values(@quarter_2)
     expect(@total_coins.user_message(@chips)).to eq(0.50)
   end
+
+  it 'does not dispense a product if user has not added enough money' do
+    @total_coins.evaluate_coin_values(@quarter_2)
+    @chips.selected = true
+    expect(@total_coins.user_message(@chips)).to eq(0.25)
+  end
 end
