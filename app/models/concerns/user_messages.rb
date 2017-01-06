@@ -7,11 +7,15 @@ module UserMessages
     "THANK YOU"
   end
 
-  def user_message(product = nil)
+  def product_selected?
+    Product.all.select{|product| product.selected == true}
+  end
+
+  def user_message
     case
     when self.total == 0
         insert_coins
-    when product != nil && self.total == product.price && product.selected == true
+    when product_selected?[0] && self.total == product_selected?[0].price
       dispense_item
       else
         self.value = self.total
