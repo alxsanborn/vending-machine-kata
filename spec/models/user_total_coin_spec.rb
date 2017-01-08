@@ -129,4 +129,11 @@ end
     @total_coins.reset_quarters_amount
     expect(@total_coins.quarters.length).to eq(0)
   end
+
+  it 'thanks the user when item dispenses and then resets, asking the user to "INSERT COINS"' do
+    @total_coins.evaluate_coin_values(@quarter_1)
+    @total_coins.evaluate_coin_values(@quarter_2)
+    @chips.update(selected: true)
+    allow(@total_coins).to receive(:user_message).and_return("THANK YOU", "INSERT COINS")
+  end
 end

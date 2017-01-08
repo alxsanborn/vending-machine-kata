@@ -31,7 +31,8 @@ module UserMessages
       reset_dimes_amount
       reset_nickels_amount
       reset_quarters_amount
-      dispense_item
+      return dispense_item
+      return user_message
       else
         self.value = self.total
         self.value
