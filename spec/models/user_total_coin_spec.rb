@@ -108,4 +108,11 @@ end
     @chips.update(selected: true)
     expect(@total_coins.user_message).to eq(0.25)
   end
+
+  it 'resets dimes' do
+    @total_coins.evaluate_coin_values(@dime_1)
+    expect(@total_coins.dimes.length).to eq(1)
+    @total_coins.reset_dimes_amount
+    expect(@total_coins.dimes.length).to eq(0)
+  end
 end

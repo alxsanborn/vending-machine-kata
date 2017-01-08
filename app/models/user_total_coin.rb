@@ -26,7 +26,7 @@ COIN_STANDARDS = [
 ]
 
 class UserTotalCoin < ApplicationRecord
-  has_many :dimes
+  has_many :dimes#, dependent: :destroy
   has_many :nickels
   has_many :quarters
 
