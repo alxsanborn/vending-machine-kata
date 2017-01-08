@@ -122,4 +122,11 @@ end
     @total_coins.reset_nickels_amount
     expect(@total_coins.nickels.length).to eq(0)
   end
+
+  it 'resets quarters' do
+    @total_coins.evaluate_coin_values(@quarter_1)
+    expect(@total_coins.quarters.length).to eq(1)
+    @total_coins.reset_quarters_amount
+    expect(@total_coins.quarters.length).to eq(0)
+  end
 end

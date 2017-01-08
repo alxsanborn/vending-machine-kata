@@ -19,6 +19,10 @@ module UserMessages
     self.nickels.delete_all
   end
 
+  def reset_quarters_amount
+    self.quarters.delete_all
+  end
+
   def user_message
     case
     when self.total == 0
@@ -26,6 +30,7 @@ module UserMessages
     when product_selected?[0] && self.total == product_selected?[0].price
       reset_dimes_amount
       reset_nickels_amount
+      reset_quarters_amount
       dispense_item
       else
         self.value = self.total
