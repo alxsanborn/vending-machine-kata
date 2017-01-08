@@ -115,4 +115,11 @@ end
     @total_coins.reset_dimes_amount
     expect(@total_coins.dimes.length).to eq(0)
   end
+
+  it 'resets nickels' do
+    @total_coins.evaluate_coin_values(@nickel)
+    expect(@total_coins.nickels.length).to eq(1)
+    @total_coins.reset_nickels_amount
+    expect(@total_coins.nickels.length).to eq(0)
+  end
 end
