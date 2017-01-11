@@ -134,6 +134,9 @@ end
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
     @chips.update(selected: true)
+    @total_coins.user_message #had to add this line because changes to coin quantities were not persisting in the database 
     allow(@total_coins).to receive(:user_message).and_return("THANK YOU", "INSERT COINS")
+    expect(@total_coins.quarters.length).to eq(0)
+    #possible refactor later?
   end
 end

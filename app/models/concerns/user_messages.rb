@@ -12,15 +12,15 @@ module UserMessages
   end
 
   def reset_dimes_amount
-    self.dimes.delete_all
+    dimes.delete_all
   end
 
   def reset_nickels_amount
-    self.nickels.delete_all
+    nickels.delete_all
   end
 
   def reset_quarters_amount
-    self.quarters.delete_all
+    quarters.delete_all
   end
 
   def user_message
@@ -34,6 +34,7 @@ module UserMessages
       return dispense_item
       return user_message
       else
+        value_will_change!
         self.value = self.total
         self.value
     end
