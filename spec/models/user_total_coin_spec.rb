@@ -13,9 +13,9 @@ RSpec.describe UserTotalCoin, type: :model do
 
     @total_coins.coin_return = CoinReturn.create
 
-    @cola = Product.create(name: "cola", price: 1.00)
+    @cola = Product.create(name: "cola", price: 1.00, quantity: 30)
     @chips = Product.create(name: "chips", price: 0.50)
-    @candy = Product.create(name: "candy", price: 0.65)
+    @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
   end
 
   it 'can add dimes' do
@@ -95,7 +95,9 @@ end
   it 'thanks the user when a product has been successfully purchased' do
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
-    @chips.update(selected: true)
+    @total_coins.evaluate_coin_values(@dime_1)
+    @total_coins.evaluate_coin_values(@nickel)
+    @candy.update(selected: true)
     expect(@total_coins.user_message).to eq("THANK YOU")
   end
 
@@ -115,7 +117,9 @@ end
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
     @total_coins.evaluate_coin_values(@dime_1)
-    @chips.update(selected: true)
+    @total_coins.evaluate_coin_values(@dime_2)
+    @total_coins.evaluate_coin_values(@nickel)
+    @candy.update(selected: true)
     allow(@total_coins).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
   end
 
@@ -187,5 +191,13 @@ end
   it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
     @total_coins.update(return_coins: true)
     expect(@total_coins.user_message).to eq("INSERT COINS")
+  end
+
+  it 'tells a user a product if a product is sold out' do
+    @total_coins.evaluate_coin_values(@quarter_1)
+    @total_coins.evaluate_coin_values(@quarter_2)
+    @total_coins.evaluate_coin_values(@dime_1)
+    @chips.update(selected: true)
+    expect(@total_coins.user_message).to eq("SOLD OUT")
   end
 end

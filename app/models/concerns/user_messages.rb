@@ -7,6 +7,10 @@ module UserMessages
     "THANK YOU"
   end
 
+  def sold_out
+    "SOLD OUT"
+  end
+
   def product_selected?
     Product.all.select{|product| product.selected == true}
   end
@@ -66,7 +70,9 @@ module UserMessages
       return_inserted_coins
     when self.total == 0
       insert_coins
-    when product_selected?[0] && self.total >= product_selected?[0].price
+    when product_selected?[0] && self.total >= product_selected?[0].price && product_selected?[0].quantity == 0
+      sold_out
+    when product_selected?[0] && self.total >= product_selected?[0].price && product_selected?[0].quantity > 0
       make_change(remainder?) if remainder? > 0
       dispense_item
     else
