@@ -157,4 +157,9 @@ end
   it 'return coins button defaults to false' do
     expect(@total_coins.return_coins).to eq(false)
   end
+
+  it 'a user can press a button to return coins' do
+    @total_coins.update(return_coins: true)
+    expect(@total_coins.return_coins).to eq(true)
+  end
 end
