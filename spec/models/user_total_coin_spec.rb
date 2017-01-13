@@ -183,4 +183,9 @@ end
     @chips.update(selected: true)
     expect(@total_coins.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
   end
+
+  it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
+    @total_coins.update(return_coins: true)
+    expect(@total_coins.user_message).to eq("INSERT COINS")
+  end
 end
