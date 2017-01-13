@@ -153,4 +153,8 @@ end
   it 'can return one of each coin' do
     expect(@total_coins.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
   end
+
+  it 'return coins button defaults to false' do
+    expect(@total_coins.return_coins).to eq(false)
+  end
 end

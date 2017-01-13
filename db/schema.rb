@@ -69,8 +69,9 @@ ActiveRecord::Schema.define(version: 20170113160046) do
 
   create_table "user_total_coins", force: :cascade do |t|
     t.decimal  "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "return_coins", default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
 end
