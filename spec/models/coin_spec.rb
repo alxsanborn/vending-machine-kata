@@ -65,15 +65,40 @@ RSpec.describe Coin, type: :model do
   end
 
   it 'can return the total value of coins that a user has inserted' do
-      @dime_1.evaluate_coin_values(@valid_coins)
-      @dime_2.evaluate_coin_values(@valid_coins)
-      @dime_3.evaluate_coin_values(@valid_coins)
-      @quarter_1.evaluate_coin_values(@valid_coins)
-      @quarter_2.evaluate_coin_values(@valid_coins)
-      @nickel.evaluate_coin_values(@valid_coins)
-      @penny.evaluate_coin_values(@valid_coins)
+    @dime_1.evaluate_coin_values(@valid_coins)
+    @dime_2.evaluate_coin_values(@valid_coins)
+    @dime_3.evaluate_coin_values(@valid_coins)
+    @quarter_1.evaluate_coin_values(@valid_coins)
+    @quarter_2.evaluate_coin_values(@valid_coins)
+    @nickel.evaluate_coin_values(@valid_coins)
+    @penny.evaluate_coin_values(@valid_coins)
 
-      expect(@valid_coins.total).to eq(0.85)
+    expect(@valid_coins.total).to eq(0.85)
+end
+
+  it 'rejects objects with valid diameter and thickness but invalid weight' do
+   invalid_dime = Coin.create(weight: 2.500, diameter: 0.705, thickness: 0.053)
+   invalid_dime.evaluate_coin_values(@valid_coins)
+   expect(@valid_coins.quarters.length).to eq(0)
+   expect(@valid_coins.nickels.length).to eq(0)
+   expect(@valid_coins.dimes.length).to eq(0)
+
+  end
+
+  it 'rejects objects with valid weight and thickness but invalid diameter' do
+   invalid_nickel = Coin.create(weight: 5.000, diameter: 3.000, thickness: 1.950)
+   invalid_nickel.evaluate_coin_values(@valid_coins)
+   expect(@valid_coins.quarters.length).to eq(0)
+   expect(@valid_coins.nickels.length).to eq(0)
+   expect(@valid_coins.dimes.length).to eq(0)
+  end
+
+  it 'rejects objects with valid weight and diameter but invalid thickness' do
+   invalid_quarter = Coin.create(weight: 5.561, diameter: 0.955, thickness: 0.066)
+   invalid_quarter.evaluate_coin_values(@valid_coins)
+   expect(@valid_coins.quarters.length).to eq(0)
+   expect(@valid_coins.nickels.length).to eq(0)
+   expect(@valid_coins.dimes.length).to eq(0)
   end
 
 end
