@@ -12,7 +12,7 @@ module UserMessages
   end
 
   def product_selected?
-    Product.all.select{|product| product.selected == true}
+    Product.all.select{|product| product.selected == true}[0]
   end
 
   def make_change_quarters(remainder)
@@ -53,7 +53,7 @@ module UserMessages
   end
 
   def remainder?
-    self.total - product_selected?[0].price
+    self.total - product_selected?.price
   end
 
   def return_inserted_coins
@@ -70,9 +70,9 @@ module UserMessages
       return_inserted_coins
     when self.total == 0
       insert_coins
-    when product_selected?[0] && self.total >= product_selected?[0].price && product_selected?[0].quantity == 0
+    when product_selected? && self.total >= product_selected?.price && product_selected?.quantity == 0
       sold_out
-    when product_selected?[0] && self.total >= product_selected?[0].price && product_selected?[0].quantity > 0
+    when product_selected? && self.total >= product_selected?.price && product_selected?.quantity > 0
       make_change(remainder?) if remainder? > 0
       dispense_item
     else
