@@ -111,7 +111,7 @@ end
     expect(@total_coins.user_message).to eq(0.25)
   end
 
-  it 'thanks the user when item dispenses and then resets, asking the user to "INSERT COINS"' do
+  it 'when item is successfully purchased, dispenses change and thanks the user' do
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
     @total_coins.evaluate_coin_values(@dime_1)
