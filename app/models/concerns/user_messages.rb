@@ -26,7 +26,7 @@ module UserMessages
   def make_change_quarters(remainder)
     while remainder >= 0.25
       remainder -= 0.25
-      @change["quarters"] += 1
+      self.coin_return.quarters.push(Quarter.create)
       if remainder < 0.25
         break
       end

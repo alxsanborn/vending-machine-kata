@@ -11,6 +11,8 @@ RSpec.describe UserTotalCoin, type: :model do
     @nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
     @penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)
 
+    @total_coins.coin_return = CoinReturn.create
+
     @cola = Product.create(name: "cola", price: 1.00)
     @chips = Product.create(name: "chips", price: 0.50)
     @candy = Product.create(name: "candy", price: 0.65)
@@ -138,6 +140,11 @@ end
     allow(@total_coins).to receive(:user_message).and_return("THANK YOU", "INSERT COINS")
     expect(@total_coins.quarters.length).to eq(0)
     #possible refactor later?
+  end
+
+  it 'can return quarters as change' do
+    expect(@total_coins.make_change_quarters(0.65)).to eq(0.15)
+    expect(@total_coins.coin_return.quarters.length).to eq(2)
   end
 
   it 'has a method that can determine which coins to return when making change' do
