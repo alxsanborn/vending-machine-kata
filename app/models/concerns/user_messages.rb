@@ -52,8 +52,18 @@ module UserMessages
     self.total - product_selected?[0].price
   end
 
+  def return_inserted_coins
+    {
+    "quarters" => self.quarters.length,
+    "dimes" => self.dimes.length,
+    "nickels" => self.nickels.length
+    }
+  end
+
   def user_message
     case
+    when self.return_coins == true && self.total > 0
+      return_inserted_coins
     when self.total == 0
       insert_coins
     when product_selected?[0] && self.total >= product_selected?[0].price
