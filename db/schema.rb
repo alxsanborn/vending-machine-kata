@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170113160046) do
     t.string   "name"
     t.decimal  "price"
     t.boolean  "selected",   default: false
+    t.integer  "quantity",   default: 0
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end

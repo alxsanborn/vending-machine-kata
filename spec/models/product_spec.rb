@@ -26,4 +26,8 @@ RSpec.describe Product, type: :model do
     coffee.selected = true
     expect(coffee.selected).to be(true)
   end
+
+  it 'quantity defaults to 0' do
+    expect(coffee.quantity).to eq(0)
+  end
 end
