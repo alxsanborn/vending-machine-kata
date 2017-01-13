@@ -193,7 +193,7 @@ end
     expect(@total_coins.user_message).to eq("INSERT COINS")
   end
 
-  it 'tells a user a product if a product is sold out' do
+  it 'tells a user when a product is sold out' do
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
     @total_coins.evaluate_coin_values(@dime_1)
