@@ -111,35 +111,12 @@ end
     expect(@total_coins.user_message).to eq(0.25)
   end
 
-  it 'resets dimes' do
-    @total_coins.evaluate_coin_values(@dime_1)
-    expect(@total_coins.dimes.length).to eq(1)
-    @total_coins.reset_dimes_amount
-    expect(@total_coins.dimes.length).to eq(0)
-  end
-
-  it 'resets nickels' do
-    @total_coins.evaluate_coin_values(@nickel)
-    expect(@total_coins.nickels.length).to eq(1)
-    @total_coins.reset_nickels_amount
-    expect(@total_coins.nickels.length).to eq(0)
-  end
-
-  it 'resets quarters' do
-    @total_coins.evaluate_coin_values(@quarter_1)
-    expect(@total_coins.quarters.length).to eq(1)
-    @total_coins.reset_quarters_amount
-    expect(@total_coins.quarters.length).to eq(0)
-  end
-
   it 'thanks the user when item dispenses and then resets, asking the user to "INSERT COINS"' do
     @total_coins.evaluate_coin_values(@quarter_1)
     @total_coins.evaluate_coin_values(@quarter_2)
+    @total_coins.evaluate_coin_values(@dime_1)
     @chips.update(selected: true)
-    @total_coins.user_message #had to add this line because changes to coin quantities were not persisting in the database
-    allow(@total_coins).to receive(:user_message).and_return("THANK YOU", "INSERT COINS")
-    expect(@total_coins.quarters.length).to eq(0)
-    #possible refactor later?
+    allow(@total_coins).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
   end
 
   it 'can return quarters as change' do

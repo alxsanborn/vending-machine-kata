@@ -11,18 +11,6 @@ module UserMessages
     Product.all.select{|product| product.selected == true}
   end
 
-  def reset_dimes_amount
-    dimes.delete_all
-  end
-
-  def reset_nickels_amount
-    nickels.delete_all
-  end
-
-  def reset_quarters_amount
-    quarters.delete_all
-  end
-
   def make_change_quarters(remainder)
     while remainder >= 0.25
       remainder -= 0.25
@@ -60,16 +48,17 @@ module UserMessages
     }
   end
 
+  def remainder?
+    self.total - product_selected?[0].price
+  end
+
   def user_message
     case
     when self.total == 0
       insert_coins
-    when product_selected?[0] && self.total == product_selected?[0].price
-      reset_dimes_amount
-      reset_nickels_amount
-      reset_quarters_amount
-      return dispense_item
-      return user_message
+    when product_selected?[0] && self.total >= product_selected?[0].price
+      make_change(remainder?) if remainder? > 0
+      dispense_item
     else
         value_will_change!
         self.value = self.total
