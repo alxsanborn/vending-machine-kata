@@ -35,6 +35,19 @@ module UserMessages
     quarters
   end
 
+  def make_change_dimes(remainder)
+    dimes = 0
+    while remainder >= 0.10
+        remainder -= 0.10
+        dimes += 1
+      if remainder < 0.10
+        break
+      end
+    end
+    dimes
+  end
+
+
   def user_message
     case
     when self.total == 0

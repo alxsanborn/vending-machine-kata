@@ -142,6 +142,9 @@ end
 
   it 'can return quarters as change' do
     expect(@total_coins.make_change_quarters(0.65)).to eq(2)
+  end
 
+  it 'can return dimes as change' do
+    expect(@total_coins.make_change_dimes(0.80)).to eq(8)
   end
 end
