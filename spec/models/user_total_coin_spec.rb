@@ -172,5 +172,15 @@ end
     @total_coins.update(return_coins: true)
     expect(@total_coins.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
   end
-  #create secondary test - even if item is selected, will return coins if return coins button is selected
+
+  it 'returns a coins when the button is pressed even if user has selected an item' do
+    @total_coins.evaluate_coin_values(@dime_1)
+    @total_coins.evaluate_coin_values(@dime_2)
+    @total_coins.evaluate_coin_values(@quarter_1)
+    @total_coins.evaluate_coin_values(@quarter_2)
+    @total_coins.evaluate_coin_values(@nickel)
+    @total_coins.update(return_coins: true)
+    @chips.update(selected: true)
+    expect(@total_coins.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+  end
 end
