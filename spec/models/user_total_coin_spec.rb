@@ -152,6 +152,11 @@ end
     expect(@total_coins.coin_return.dimes.length).to eq(8)
   end
 
+  it 'can return nickels as change' do
+    @total_coins.make_change_nickels
+    expect(@total_coins.coin_return.nickels.length).to eq(1)
+  end
+
   it 'has a method that can determine which coins to return when making change' do
     expect(@total_coins.make_change(0.25)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 0})
     expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})

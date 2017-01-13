@@ -46,7 +46,7 @@ module UserMessages
   end
 
   def make_change_nickels
-    @change["nickels"] += 1
+    self.coin_return.nickels.push(Nickel.create)
   end
 
   def make_change(remainder)
