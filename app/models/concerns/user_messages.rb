@@ -37,7 +37,7 @@ module UserMessages
   def make_change_dimes(remainder)
     while remainder >= 0.10
       remainder -= 0.10
-      @change["dimes"] += 1
+      self.coin_return.dimes.push(Dime.create)
       if remainder < 0.10
         break
       end
