@@ -26,9 +26,10 @@ COIN_STANDARDS = [
 ]
 
 class UserTotalCoin < ApplicationRecord
-  has_many :dimes#, dependent: :destroy
+  has_many :dimes
   has_many :nickels
   has_many :quarters
+  has_one :coin_return
 
   include UserMessages
 

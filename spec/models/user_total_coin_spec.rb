@@ -140,15 +140,11 @@ end
     #possible refactor later?
   end
 
-  it 'can return quarters as change' do
-    expect(@total_coins.make_change_quarters(0.65)).to eq(2)
-  end
-
-  it 'can return dimes as change' do
-    expect(@total_coins.make_change_dimes(0.80)).to eq(8)
-  end
-
-  it 'can return nickels as change' do
-    expect(@total_coins.make_change_nickels(0.45)).to eq(9)
+  it 'has a method that can determine which coins to return when making change' do
+    expect(@total_coins.make_change(0.25)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 0})
+    expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
+    expect(@total_coins.make_change(0.15)).to eq({"quarters" => 0, "nickels" => 1, "dimes" => 1})
+    expect(@total_coins.make_change(0.50)).to eq({"quarters" => 2, "nickels" => 0, "dimes" => 0})
+    expect(@total_coins.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
   end
 end

@@ -24,39 +24,41 @@ module UserMessages
   end
 
   def make_change_quarters(remainder)
-    quarters = 0
     while remainder >= 0.25
-        remainder -= 0.25
-        quarters += 1
+      remainder -= 0.25
+      @change["quarters"] += 1
       if remainder < 0.25
         break
       end
     end
-    quarters
+    remainder.round(2)
   end
 
   def make_change_dimes(remainder)
-    dimes = 0
     while remainder >= 0.10
-        remainder -= 0.10
-        dimes += 1
+      remainder -= 0.10
+      @change["dimes"] += 1
       if remainder < 0.10
         break
       end
     end
-    dimes
+    remainder.round(2)
   end
 
-  def make_change_nickels(remainder)
-    nickels = 0
-    while remainder >= 0.05
-        remainder -= 0.05
-        nickels += 1
-      if remainder < 0.05
-        break
-      end
-    end
-    nickels
+  def make_change_nickels
+    @change["nickels"] += 1
+  end
+
+  def make_change(remainder)
+    @change = {
+      "quarters" => 0,
+      "nickels" => 0,
+      "dimes" => 0
+    }
+    remainder = make_change_quarters(remainder)
+    remainder = make_change_dimes(remainder)
+    make_change_nickels if remainder && remainder > 0
+    @change
   end
 
   def user_message
@@ -69,7 +71,7 @@ module UserMessages
       reset_quarters_amount
       return dispense_item
       return user_message
-      else
+    else
         value_will_change!
         self.value = self.total
         self.value

@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106162207) do
+ActiveRecord::Schema.define(version: 20170113160046) do
+
+  create_table "coin_returns", force: :cascade do |t|
+    t.integer  "user_total_coin_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["user_total_coin_id"], name: "index_coin_returns_on_user_total_coin_id"
+  end
 
   create_table "coins", force: :cascade do |t|
     t.decimal  "weight"
@@ -22,15 +29,19 @@ ActiveRecord::Schema.define(version: 20170106162207) do
 
   create_table "dimes", force: :cascade do |t|
     t.integer  "user_total_coin_id"
+    t.integer  "coin_return_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["coin_return_id"], name: "index_dimes_on_coin_return_id"
     t.index ["user_total_coin_id"], name: "index_dimes_on_user_total_coin_id"
   end
 
   create_table "nickels", force: :cascade do |t|
     t.integer  "user_total_coin_id"
+    t.integer  "coin_return_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["coin_return_id"], name: "index_nickels_on_coin_return_id"
     t.index ["user_total_coin_id"], name: "index_nickels_on_user_total_coin_id"
   end
 
@@ -49,8 +60,10 @@ ActiveRecord::Schema.define(version: 20170106162207) do
 
   create_table "quarters", force: :cascade do |t|
     t.integer  "user_total_coin_id"
+    t.integer  "coin_return_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["coin_return_id"], name: "index_quarters_on_coin_return_id"
     t.index ["user_total_coin_id"], name: "index_quarters_on_user_total_coin_id"
   end
 
