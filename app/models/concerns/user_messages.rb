@@ -50,15 +50,14 @@ module UserMessages
   end
 
   def make_change(remainder)
-    @change = {
-      "quarters" => 0,
-      "nickels" => 0,
-      "dimes" => 0
-    }
     remainder = make_change_quarters(remainder)
     remainder = make_change_dimes(remainder)
     make_change_nickels if remainder && remainder > 0
-    @change
+    return {
+      "quarters" => self.coin_return.quarters.length,
+      "dimes" => self.coin_return.dimes.length,
+      "nickels" => self.coin_return.nickels.length
+    }
   end
 
   def user_message

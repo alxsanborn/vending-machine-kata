@@ -157,11 +157,23 @@ end
     expect(@total_coins.coin_return.nickels.length).to eq(1)
   end
 
-  it 'has a method that can determine which coins to return when making change' do
+  it 'can return one coin' do
     expect(@total_coins.make_change(0.25)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 0})
+  end
+
+  it 'can return multiple coins' do
     expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
+  end
+
+  it 'can return nickels' do
     expect(@total_coins.make_change(0.15)).to eq({"quarters" => 0, "nickels" => 1, "dimes" => 1})
+  end
+
+  it 'can return multiple quantities of the same coin' do
     expect(@total_coins.make_change(0.50)).to eq({"quarters" => 2, "nickels" => 0, "dimes" => 0})
+  end
+
+  it 'can return one of each coin' do
     expect(@total_coins.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
   end
 end
