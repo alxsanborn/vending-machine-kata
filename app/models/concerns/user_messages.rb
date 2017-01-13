@@ -47,6 +47,17 @@ module UserMessages
     dimes
   end
 
+  def make_change_nickels(remainder)
+    nickels = 0
+    while remainder >= 0.05
+        remainder -= 0.05
+        nickels += 1
+      if remainder < 0.05
+        break
+      end
+    end
+    nickels
+  end
 
   def user_message
     case

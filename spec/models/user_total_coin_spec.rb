@@ -147,4 +147,8 @@ end
   it 'can return dimes as change' do
     expect(@total_coins.make_change_dimes(0.80)).to eq(8)
   end
+
+  it 'can return nickels as change' do
+    expect(@total_coins.make_change_nickels(0.45)).to eq(9)
+  end
 end
