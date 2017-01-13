@@ -23,6 +23,18 @@ module UserMessages
     quarters.delete_all
   end
 
+  def make_change_quarters(remainder)
+    quarters = 0
+    while remainder >= 0.25
+        remainder -= 0.25
+        quarters += 1
+      if remainder < 0.25
+        break
+      end
+    end
+    quarters
+  end
+
   def user_message
     case
     when self.total == 0
