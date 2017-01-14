@@ -36,4 +36,9 @@ RSpec.describe Product, type: :model do
     binding.pry
     expect(coffee.product_selected?).to eq(coffee)
   end
+
+  it 'can deselect a product' do
+    coffee.update(selected: true)
+    expect(coffee.deselect_button).to be(false)
+  end
 end

@@ -10,6 +10,10 @@ module Actions
     def product_selected?
       Product.all.select{|product| product.selected == true}.first
     end
+
+    def deselect_button
+      self.selected = false
+    end
   end
 
 end
