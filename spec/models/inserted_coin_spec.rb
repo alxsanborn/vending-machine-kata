@@ -23,6 +23,10 @@ RSpec.describe InsertedCoin, type: :model do
   #   expect(@total_coins.user_message).to eq("INSERT COINS")
   # end
   #
+  it 'returns a value of 0 if no coins have been added' do
+    expect(@inserted_coins.total).to eq(0)
+  end
+
   it 'returns the value of coins when one coin has been added' do
     @dime_1.evaluate_coin_values(@inserted_coins)
     expect(@inserted_coins.total).to eq(0.10)
