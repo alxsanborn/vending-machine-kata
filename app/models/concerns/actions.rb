@@ -6,11 +6,8 @@ module Actions
     end
   end
 
-  module Products
-    def product_selected?
-      Product.all.select{|product| product.selected == true}.first
-    end
 
+  module ProductInstance
     def select_button
       self.selected = true
       self.save
@@ -19,6 +16,12 @@ module Actions
     def deselect_button
       self.selected = false
       self.save
+    end
+  end
+
+  module ProductClass
+    def product_selected?
+      Product.all.select{|product| product.selected == true}.first
     end
   end
 

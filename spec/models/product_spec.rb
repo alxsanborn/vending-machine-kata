@@ -33,7 +33,7 @@ RSpec.describe Product, type: :model do
 
   it 'can detect which products are selected' do
     coffee.select_button
-    expect(coffee.product_selected?).to eq(coffee)
+    expect(Product.product_selected?).to eq(coffee)
   end
 
   it 'can deselect a product' do
