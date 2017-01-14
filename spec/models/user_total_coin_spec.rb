@@ -31,32 +31,32 @@ RSpec.describe UserTotalCoin, type: :model do
   end
 
   it 'thanks the user when a product has been successfully purchased' do
-    @total_coins.evaluate_coin_values(@quarter_1)
-    @total_coins.evaluate_coin_values(@quarter_2)
-    @total_coins.evaluate_coin_values(@dime_1)
-    @total_coins.evaluate_coin_values(@nickel)
+    @quarter_1.evaluate_coin_values(@total_coins)
+    @quarter_2.evaluate_coin_values(@total_coins)
+    @dime_1.evaluate_coin_values(@total_coins)
+    @nickel.evaluate_coin_values(@total_coins)
     @candy.update(selected: true)
     expect(@total_coins.user_message).to eq("THANK YOU")
   end
 
   it 'does not dispense a product if product has not been selected' do
-    @total_coins.evaluate_coin_values(@quarter_1)
-    @total_coins.evaluate_coin_values(@quarter_2)
+    @quarter_1.evaluate_coin_values(@total_coins)
+    @quarter_2.evaluate_coin_values(@total_coins)
     expect(@total_coins.user_message).to eq(0.50)
   end
 
   it 'does not dispense a product if user has not added enough money' do
-    @total_coins.evaluate_coin_values(@quarter_2)
+    @quarter_2.evaluate_coin_values(@total_coins)
     @chips.update(selected: true)
     expect(@total_coins.user_message).to eq(0.25)
   end
 
   it 'when item is successfully purchased, dispenses change and thanks the user' do
-    @total_coins.evaluate_coin_values(@quarter_1)
-    @total_coins.evaluate_coin_values(@quarter_2)
-    @total_coins.evaluate_coin_values(@dime_1)
-    @total_coins.evaluate_coin_values(@dime_2)
-    @total_coins.evaluate_coin_values(@nickel)
+    @quarter_1.evaluate_coin_values(@total_coins)
+    @quarter_2.evaluate_coin_values(@total_coins)
+    @dime_1.evaluate_coin_values(@total_coins)
+    @dime_2.evaluate_coin_values(@total_coins)
+    @nickel.evaluate_coin_values(@total_coins)
     @candy.update(selected: true)
     allow(@total_coins).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
   end
@@ -106,21 +106,21 @@ RSpec.describe UserTotalCoin, type: :model do
   end
 
   it 'returns coins when a user presses the return coins button' do
-    @total_coins.evaluate_coin_values(@dime_1)
-    @total_coins.evaluate_coin_values(@dime_2)
-    @total_coins.evaluate_coin_values(@quarter_1)
-    @total_coins.evaluate_coin_values(@quarter_2)
-    @total_coins.evaluate_coin_values(@nickel)
+    @dime_1.evaluate_coin_values(@total_coins)
+    @dime_2.evaluate_coin_values(@total_coins)
+    @quarter_1.evaluate_coin_values(@total_coins)
+    @quarter_2.evaluate_coin_values(@total_coins)
+    @nickel.evaluate_coin_values(@total_coins)
     @total_coins.update(return_coins: true)
     expect(@total_coins.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
   end
 
   it 'returns a coins when the button is pressed even if user has selected an item' do
-    @total_coins.evaluate_coin_values(@dime_1)
-    @total_coins.evaluate_coin_values(@dime_2)
-    @total_coins.evaluate_coin_values(@quarter_1)
-    @total_coins.evaluate_coin_values(@quarter_2)
-    @total_coins.evaluate_coin_values(@nickel)
+    @dime_1.evaluate_coin_values(@total_coins)
+    @dime_2.evaluate_coin_values(@total_coins)
+    @quarter_1.evaluate_coin_values(@total_coins)
+    @quarter_2.evaluate_coin_values(@total_coins)
+    @nickel.evaluate_coin_values(@total_coins)
     @total_coins.update(return_coins: true)
     @chips.update(selected: true)
     expect(@total_coins.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
@@ -132,9 +132,9 @@ RSpec.describe UserTotalCoin, type: :model do
   end
 
   it 'tells a user when a product is sold out' do
-    @total_coins.evaluate_coin_values(@quarter_1)
-    @total_coins.evaluate_coin_values(@quarter_2)
-    @total_coins.evaluate_coin_values(@dime_1)
+    @quarter_1.evaluate_coin_values(@total_coins)
+    @quarter_2.evaluate_coin_values(@total_coins)
+    @dime_1.evaluate_coin_values(@total_coins)
     @chips.update(selected: true)
     expect(@total_coins.user_message).to eq("SOLD OUT")
   end
