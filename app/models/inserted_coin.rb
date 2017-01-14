@@ -4,9 +4,9 @@ class InsertedCoin < ApplicationRecord
   has_many :quarters
   belongs_to :order
 
-  # def total
-  #   ((self.dimes.length*0.1) + (self.nickels.length*0.05) + (self.quarters.length*0.25)).round(2)
-  # end
+  def total
+    ((self.dimes.length*0.1) + (self.nickels.length*0.05) + (self.quarters.length*0.25)).round(2)
+  end
   #
   #   def insert_coins
   #     "INSERT COINS"

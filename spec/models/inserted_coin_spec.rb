@@ -1,34 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe InsertedCoin, type: :model do
-  # before(:each) do
-  #   @total_coins = InsertedCoin.create
-  #   @dime_1 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
-  #   @dime_2 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
-  #   @dime_3 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
-  #   @quarter_1 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
-  #   @quarter_2 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
-  #   @nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
-  #   @penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)
-  #
+   before(:each) do
+     @inserted_coins = InsertedCoin.create
+     @dime_1 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
+     @dime_2 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
+     @dime_3 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
+     @quarter_1 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
+     @quarter_2 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
+     @nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
+     @penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)
+
   #   @total_coins.coin_return = CoinReturn.create
   #
   #   @cola = Product.create(name: "cola", price: 1.00, quantity: 30)
   #   @chips = Product.create(name: "chips", price: 0.50)
   #   @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
-  # end
+   end
   #
   #
   # it 'prompts a user to insert coin if no valid coins have yet been inserted' do
   #   expect(@total_coins.user_message).to eq("INSERT COINS")
   # end
   #
-  # it 'returns the value of coins that have been added if valid coins have been inserted' do
-  #   @dime_1.evaluate_coin_values(@total_coins)
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #
-  #   expect(@total_coins.user_message).to eq(0.35)
-  # end
+  it 'returns the value of coins when one coin has been added' do
+    @dime_1.evaluate_coin_values(@inserted_coins)
+    expect(@inserted_coins.total).to eq(0.10)
+  end
   #
   # it 'thanks the user when a product has been successfully purchased' do
   #   @quarter_1.evaluate_coin_values(@total_coins)
