@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113160046) do
+ActiveRecord::Schema.define(version: 20170114173604) do
 
   create_table "coin_returns", force: :cascade do |t|
-    t.integer  "user_total_coin_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["user_total_coin_id"], name: "index_coin_returns_on_user_total_coin_id"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_coin_returns_on_order_id"
   end
 
   create_table "coins", force: :cascade do |t|
@@ -36,6 +36,23 @@ ActiveRecord::Schema.define(version: 20170113160046) do
     t.index ["user_total_coin_id"], name: "index_dimes_on_user_total_coin_id"
   end
 
+  create_table "inserted_coins", force: :cascade do |t|
+    t.decimal  "value"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_inserted_coins_on_order_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "name"
+    t.decimal  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+  end
+
   create_table "nickels", force: :cascade do |t|
     t.integer  "user_total_coin_id"
     t.integer  "coin_return_id"
@@ -43,6 +60,11 @@ ActiveRecord::Schema.define(version: 20170113160046) do
     t.datetime "updated_at",         null: false
     t.index ["coin_return_id"], name: "index_nickels_on_coin_return_id"
     t.index ["user_total_coin_id"], name: "index_nickels_on_user_total_coin_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pennies", force: :cascade do |t|
@@ -53,10 +75,9 @@ ActiveRecord::Schema.define(version: 20170113160046) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.decimal  "price"
-    t.boolean  "selected",   default: false
     t.integer  "quantity",   default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "quarters", force: :cascade do |t|
@@ -66,13 +87,6 @@ ActiveRecord::Schema.define(version: 20170113160046) do
     t.datetime "updated_at",         null: false
     t.index ["coin_return_id"], name: "index_quarters_on_coin_return_id"
     t.index ["user_total_coin_id"], name: "index_quarters_on_user_total_coin_id"
-  end
-
-  create_table "user_total_coins", force: :cascade do |t|
-    t.decimal  "value"
-    t.boolean  "return_coins", default: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
   end
 
 end

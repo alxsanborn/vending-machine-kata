@@ -1,9 +1,8 @@
 class CreateUserTotalCoins < ActiveRecord::Migration[5.0]
   def change
-    create_table :user_total_coins do |t|
+    create_table :inserted_coins do |t|
       t.decimal :value
-      t.boolean :return_coins, :default => false
-
+      t.belongs_to :order, foreign_key: true, optional: true
       t.timestamps
     end
   end
