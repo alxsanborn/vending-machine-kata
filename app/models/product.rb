@@ -4,9 +4,5 @@ class Product < ApplicationRecord
 
   extend Actions::ProductClass
   include Actions::ProductInstance
-
-
-  # def self.product_selected?
-  #   Product.all.select{|product| product.selected == true}.first
-  # end
+  
 end
