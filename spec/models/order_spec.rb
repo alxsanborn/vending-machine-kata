@@ -6,7 +6,6 @@ RSpec.describe Order, type: :model do
     @order = Order.create
     @order.inserted_coin = InsertedCoin.create #this would be automated in the controller
     @order.coin_return = CoinReturn.create #this would be automated in the controller
-
   end
 
   it 'creates a new order' do
