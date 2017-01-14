@@ -20,10 +20,9 @@ class Order < ApplicationRecord
     #   when product_selected? && self.total >= product_selected?.price && product_selected?.quantity > 0
     #     make_change(remainder?) if remainder? > 0
     #     dispense_item
-    #   else
-    #       value_will_change!
-    #       self.value = self.total
-    #       self.value
+      else
+          self.inserted_coin.value = self.inserted_coin.total
+          self.inserted_coin.value
        end
      end
 end

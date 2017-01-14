@@ -17,12 +17,7 @@ RSpec.describe InsertedCoin, type: :model do
   #   @chips = Product.create(name: "chips", price: 0.50)
   #   @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
    end
-  #
-  #
-  # it 'prompts a user to insert coin if no valid coins have yet been inserted' do
-  #   expect(@total_coins.user_message).to eq("INSERT COINS")
-  # end
-  #
+
   it 'returns a value of 0 if no coins have been added' do
     expect(@inserted_coins.total).to eq(0)
   end
