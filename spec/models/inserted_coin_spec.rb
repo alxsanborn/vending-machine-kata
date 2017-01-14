@@ -33,6 +33,13 @@ RSpec.describe InsertedCoin, type: :model do
     @quarter_1.evaluate_coin_values(@inserted_coins)
     expect(@inserted_coins.total).to eq(0.35)
   end
+
+  it 'returns the value of coins when three different coins have been added' do
+    @dime_1.evaluate_coin_values(@inserted_coins)
+    @quarter_1.evaluate_coin_values(@inserted_coins)
+    @nickel.evaluate_coin_values(@inserted_coins)
+    expect(@inserted_coins.total).to eq(0.40)
+  end
   #
   # it 'thanks the user when a product has been successfully purchased' do
   #   @quarter_1.evaluate_coin_values(@total_coins)
