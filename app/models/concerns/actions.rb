@@ -6,4 +6,10 @@ module Actions
     end
   end
 
+  module Products
+    def product_selected?
+      Product.all.select{|product| product.selected == true}.first
+    end
+  end
+
 end

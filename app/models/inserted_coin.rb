@@ -7,17 +7,9 @@ class InsertedCoin < ApplicationRecord
   belongs_to :order
 
   include Actions::InsertedCoin
-
-  #   def dispense_item
-  #     "THANK YOU"
-  #   end
-  #
+  
   #   def sold_out
   #     "SOLD OUT"
-  #   end
-  #
-  #   def product_selected?
-  #     Product.all.select{|product| product.selected == true}[0]
   #   end
   #
   #   def make_change_quarters(remainder)

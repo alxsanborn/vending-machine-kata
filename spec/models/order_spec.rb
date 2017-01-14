@@ -13,6 +13,10 @@ RSpec.describe Order, type: :model do
     @quarter_2 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
     @nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
     @penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)
+
+    @cola = Product.create(name: "cola", price: 1.00, quantity: 30)
+    @chips = Product.create(name: "chips", price: 0.50)
+    @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
   end
 
   it 'creates a new order' do
@@ -36,4 +40,25 @@ RSpec.describe Order, type: :model do
     @quarter_2.evaluate_coin_values(@order.inserted_coin)
     expect(@order.user_message).to eq(0.5)
   end
+
+  # it 'thanks the user when a product has been successfully purchased' do
+  #   @quarter_1.evaluate_coin_values(@total_coins)
+  #   @quarter_2.evaluate_coin_values(@total_coins)
+  #   @dime_1.evaluate_coin_values(@total_coins)
+  #   @nickel.evaluate_coin_values(@total_coins)
+  #   @candy.update(selected: true)
+  #   expect(@total_coins.user_message).to eq("THANK YOU")
+  # end
+  #
+  # it 'does not dispense a product if product has not been selected' do
+  #   @quarter_1.evaluate_coin_values(@total_coins)
+  #   @quarter_2.evaluate_coin_values(@total_coins)
+  #   expect(@total_coins.user_message).to eq(0.50)
+  # end
+  #
+  # it 'does not dispense a product if user has not added enough money' do
+  #   @quarter_2.evaluate_coin_values(@total_coins)
+  #   @chips.update(selected: true)
+  #   expect(@total_coins.user_message).to eq(0.25)
+  # end
 end

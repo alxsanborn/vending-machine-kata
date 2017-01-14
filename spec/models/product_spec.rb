@@ -23,11 +23,17 @@ RSpec.describe Product, type: :model do
   end
 
   it 'user can select a product' do
-    coffee.selected = true
+    coffee.update(selected: true)
     expect(coffee.selected).to be(true)
   end
 
   it 'quantity defaults to 0' do
     expect(coffee.quantity).to eq(0)
+  end
+
+  it 'can detect which products are selected' do
+    coffee.update(selected: true)
+    binding.pry
+    expect(coffee.product_selected?).to eq(coffee)
   end
 end

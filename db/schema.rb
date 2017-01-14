@@ -67,8 +67,9 @@ ActiveRecord::Schema.define(version: 20170114172343) do
     t.string   "name"
     t.decimal  "price"
     t.integer  "quantity",   default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "selected",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "quarters", force: :cascade do |t|

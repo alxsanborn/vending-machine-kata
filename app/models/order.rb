@@ -4,9 +4,14 @@ class Order < ApplicationRecord
   has_one :coin_return
 
   include Actions::InsertedCoin
+  include Actions::Products
 
     def insert_coins
       "INSERT COINS"
+    end
+
+    def dispense_item
+      "THANK YOU"
     end
 
     def user_message
@@ -17,9 +22,9 @@ class Order < ApplicationRecord
         insert_coins
     #   when product_selected? && self.total >= product_selected?.price && product_selected?.quantity == 0
     #     sold_out
-    #   when product_selected? && self.total >= product_selected?.price && product_selected?.quantity > 0
+      when product_selected? && self.inserted_coin.total >= product_selected?.price && product_selected?.quantity > 0
     #     make_change(remainder?) if remainder? > 0
-    #     dispense_item
+          dispense_item
       else
           self.inserted_coin.value = self.inserted_coin.total
           self.inserted_coin.value

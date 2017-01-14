@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.string :name
       t.decimal :price
       t.integer :quantity, :default => 0
-
+      t.boolean :selected, :default => false
       t.timestamps
     end
   end

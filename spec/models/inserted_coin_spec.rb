@@ -13,9 +13,6 @@ RSpec.describe InsertedCoin, type: :model do
 
   #   @total_coins.coin_return = CoinReturn.create
   #
-  #   @cola = Product.create(name: "cola", price: 1.00, quantity: 30)
-  #   @chips = Product.create(name: "chips", price: 0.50)
-  #   @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
    end
 
   it 'returns a value of 0 if no coins have been added' do
@@ -48,27 +45,6 @@ RSpec.describe InsertedCoin, type: :model do
     @nickel.evaluate_coin_values(@inserted_coins)
     expect(@inserted_coins.total).to eq(0.75)
   end
-  #
-  # it 'thanks the user when a product has been successfully purchased' do
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   @dime_1.evaluate_coin_values(@total_coins)
-  #   @nickel.evaluate_coin_values(@total_coins)
-  #   @candy.update(selected: true)
-  #   expect(@total_coins.user_message).to eq("THANK YOU")
-  # end
-  #
-  # it 'does not dispense a product if product has not been selected' do
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   expect(@total_coins.user_message).to eq(0.50)
-  # end
-  #
-  # it 'does not dispense a product if user has not added enough money' do
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   @chips.update(selected: true)
-  #   expect(@total_coins.user_message).to eq(0.25)
-  # end
   #
   # it 'when item is successfully purchased, dispenses change and thanks the user' do
   #   @quarter_1.evaluate_coin_values(@total_coins)
