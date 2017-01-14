@@ -2,7 +2,6 @@ class InsertedCoin < ApplicationRecord
   has_many :dimes
   has_many :nickels
   has_many :quarters
-  has_one :coin_return
   belongs_to :order
 
   def total
