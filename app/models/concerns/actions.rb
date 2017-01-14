@@ -11,8 +11,14 @@ module Actions
       Product.all.select{|product| product.selected == true}.first
     end
 
+    def select_button
+      self.selected = true
+      self.save
+    end
+
     def deselect_button
       self.selected = false
+      self.save
     end
   end
 

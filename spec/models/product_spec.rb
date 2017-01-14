@@ -23,7 +23,7 @@ RSpec.describe Product, type: :model do
   end
 
   it 'user can select a product' do
-    coffee.update(selected: true)
+    coffee.select_button
     expect(coffee.selected).to be(true)
   end
 
@@ -32,13 +32,13 @@ RSpec.describe Product, type: :model do
   end
 
   it 'can detect which products are selected' do
-    coffee.update(selected: true)
-    binding.pry
+    coffee.select_button
     expect(coffee.product_selected?).to eq(coffee)
   end
 
   it 'can deselect a product' do
     coffee.update(selected: true)
-    expect(coffee.deselect_button).to be(false)
+    coffee.deselect_button
+    expect(coffee.selected).to be(false)
   end
 end
