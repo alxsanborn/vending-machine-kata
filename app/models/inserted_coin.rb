@@ -1,17 +1,13 @@
+require_relative 'concerns/actions.rb'
+
 class InsertedCoin < ApplicationRecord
   has_many :dimes
   has_many :nickels
   has_many :quarters
   belongs_to :order
 
-  def total
-    ((self.dimes.length*0.1) + (self.nickels.length*0.05) + (self.quarters.length*0.25)).round(2)
-  end
-  #
-  #   def insert_coins
-  #     "INSERT COINS"
-  #   end
-  #
+  include Actions::InsertedCoin
+
   #   def dispense_item
   #     "THANK YOU"
   #   end
@@ -73,21 +69,5 @@ class InsertedCoin < ApplicationRecord
   #     }
   #   end
   #
-  #   def user_message
-  #     case
-  #     when self.return_coins == true && self.total > 0
-  #       return_inserted_coins
-  #     when self.total == 0
-  #       insert_coins
-  #     when product_selected? && self.total >= product_selected?.price && product_selected?.quantity == 0
-  #       sold_out
-  #     when product_selected? && self.total >= product_selected?.price && product_selected?.quantity > 0
-  #       make_change(remainder?) if remainder? > 0
-  #       dispense_item
-  #     else
-  #         value_will_change!
-  #         self.value = self.total
-  #         self.value
-  #     end
-  #   end
+
 end
