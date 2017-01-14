@@ -1,4 +1,4 @@
-class CreateUserTotalCoins < ActiveRecord::Migration[5.0]
+class CreateInsertedCoins < ActiveRecord::Migration[5.0]
   def change
     create_table :inserted_coins do |t|
       t.decimal :value

@@ -1,8 +1,9 @@
-class UserTotalCoin < ApplicationRecord
+class InsertedCoin < ApplicationRecord
   has_many :dimes
   has_many :nickels
   has_many :quarters
   has_one :coin_return
+  belongs_to :order
 
   def total
     ((self.dimes.length*0.1) + (self.nickels.length*0.05) + (self.quarters.length*0.25)).round(2)

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe UserTotalCoin, type: :model do
+RSpec.describe InsertedCoin, type: :model do
   before(:each) do
-    @total_coins = UserTotalCoin.create
+    @total_coins = InsertedCoin.create
     @dime_1 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
     @dime_2 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
     @dime_3 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
