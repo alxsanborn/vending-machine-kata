@@ -41,6 +41,7 @@ class Order < ApplicationRecord
         sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
           make_change(remainder?(product)) if remainder?(product) > 0
+          product.decrease_product_quantity
           product.deselect_button
           thank_you
       else

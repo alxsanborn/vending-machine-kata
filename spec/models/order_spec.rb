@@ -47,6 +47,7 @@ RSpec.describe Order, type: :model do
     @candy.select_button
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq("THANK YOU")
+    expect(product.quantity).to eq(4)
     expect(product.selected).to eq(false)
   end
 
@@ -62,6 +63,7 @@ RSpec.describe Order, type: :model do
     @candy.select_button
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq(0.25)
+    expect(product.quantity).to eq(5)
   end
 
   it 'can return quarters as change' do
@@ -133,9 +135,10 @@ RSpec.describe Order, type: :model do
     @quarter_2.evaluate_coin_values(@inserted_coin)
     @nickel.evaluate_coin_values(@inserted_coin)
     @order.return_coins_button
-    @chips.select_button
+    @candy.select_button
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+    expect(product.quantity).to eq(5)
   end
 
   it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
@@ -150,6 +153,7 @@ RSpec.describe Order, type: :model do
     @chips.select_button
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq("SOLD OUT")
+    expect(product.quantity).to eq(0)
   end
 
 end
