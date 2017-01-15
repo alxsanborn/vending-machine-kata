@@ -50,24 +50,28 @@ module Actions
         [dimes, remainder.round(2)]
       end
 
-      def make_change_nickels
-        1
+      def make_change_nickels(remainder)
+        if remainder > 0
+          1
+        else 0
+        end
       end
-  #
-  #     def make_change(remainder)
-  #       remainder = make_change_quarters(remainder)
-  #       remainder = make_change_dimes(remainder)
-  #       make_change_nickels if remainder && remainder > 0
-  #       return {
-  #         "quarters" => self.coin_return.quarters.length,
-  #         "dimes" => self.coin_return.dimes.length,
-  #         "nickels" => self.coin_return.nickels.length
-  #       }
-  #     end
-  #
-  #     def remainder?
-  #       self.total - product_selected?.price
-  #     end
+
+      def make_change(remainder)
+        quarters = make_change_quarters(remainder)
+        remainder = quarters[1]
+
+        dimes = make_change_dimes(remainder)
+        remainder = dimes[1]
+
+        nickels = make_change_nickels(remainder)
+
+        return {
+          "quarters" => quarters[0],
+          "dimes" => dimes[0],
+          "nickels" => nickels
+        }
+      end
    end
 
 end
