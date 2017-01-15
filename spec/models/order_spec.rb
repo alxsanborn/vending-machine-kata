@@ -111,11 +111,10 @@ RSpec.describe Order, type: :model do
   it 'return coins button defaults to false' do
     expect(@order.return_coins).to eq(false)
   end
-  #
-  # it 'changes to true when a user presses the return coins button' do
-  #   @total_coins.update(return_coins: true)
-  #   expect(@total_coins.return_coins).to eq(true)
-  # end
+
+  it 'changes to true when a user presses the return coins button' do
+    expect(@order.return_coins_button).to eq(true)
+  end
   #
   # it 'returns coins when a user presses the return coins button' do
   #   @dime_1.evaluate_coin_values(@total_coins)

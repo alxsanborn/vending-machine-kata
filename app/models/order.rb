@@ -15,13 +15,19 @@ class Order < ApplicationRecord
       "THANK YOU"
     end
 
-    def return_inserted_coins
-      {
-      "quarters" => self.quarters.length,
-      "dimes" => self.dimes.length,
-      "nickels" => self.nickels.length
-      }
+    def return_coins_button
+      self.update(return_coins: true)
     end
+
+    # def return_inserted_coins
+    #   {
+    #   "quarters" => self.quarters.length,
+    #   "dimes" => self.dimes.length,
+    #   "nickels" => self.nickels.length
+    #   }
+    # end
+
+
 
     def user_message(product = nil)
       case
