@@ -37,7 +37,7 @@ RSpec.describe Product, type: :model do
   end
 
   it 'can deselect a product' do
-    coffee.update(selected: true)
+    coffee.select_button
     coffee.deselect_button
     expect(coffee.selected).to be(false)
   end
