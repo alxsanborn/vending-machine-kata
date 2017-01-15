@@ -137,10 +137,10 @@ RSpec.describe Order, type: :model do
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
   end
-  #
-  # it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
-  #   @total_coins.update(return_coins: true)
-  #   expect(@total_coins.user_message).to eq("INSERT COINS")
-  # end
+
+  it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
+    @order.return_coins_button
+    expect(@order.user_message).to eq("INSERT COINS")
+  end
 
 end
