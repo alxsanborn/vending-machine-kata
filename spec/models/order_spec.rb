@@ -5,6 +5,7 @@ RSpec.describe Order, type: :model do
   before (:each) do
     @order = Order.create
     @order.inserted_coin = InsertedCoin.create #this would be automated in the controller
+    @inserted_coin = @order.inserted_coin
     @order.coin_return = CoinReturn.create #this would be automated in the controller
     @dime_1 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
     @dime_2 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
@@ -36,27 +37,28 @@ RSpec.describe Order, type: :model do
   end
 
   it 'returns the current balance if valid coins have been inserted' do
-    @quarter_1.evaluate_coin_values(@order.inserted_coin)
-    @quarter_2.evaluate_coin_values(@order.inserted_coin)
+    @quarter_1.evaluate_coin_values(@inserted_coin)
+    @quarter_2.evaluate_coin_values(@inserted_coin)
     expect(@order.user_message).to eq(0.5)
   end
 
   it 'thanks the user when a product has been successfully purchased' do
-    @quarter_1.evaluate_coin_values(@order.inserted_coin)
-    @quarter_2.evaluate_coin_values(@order.inserted_coin)
-    @dime_1.evaluate_coin_values(@order.inserted_coin)
-    @nickel.evaluate_coin_values(@order.inserted_coin)
+    @quarter_1.evaluate_coin_values(@inserted_coin)
+    @quarter_2.evaluate_coin_values(@inserted_coin)
+    @dime_1.evaluate_coin_values(@inserted_coin)
+    @nickel.evaluate_coin_values(@inserted_coin)
     @candy.select_button
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq("THANK YOU")
     expect(product.selected).to eq(false)
   end
   #
-  # it 'does not dispense a product if product has not been selected' do
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   expect(@total_coins.user_message).to eq(0.50)
-  # end
+  it 'does not dispense a product if product has not been selected' do
+    @quarter_1.evaluate_coin_values(@inserted_coin)
+    @quarter_2.evaluate_coin_values(@inserted_coin)
+    product = Product.product_selected?
+    expect(@order.user_message(product)).to eq(0.50)
+  end
   #
   # it 'does not dispense a product if user has not added enough money' do
   #   @quarter_2.evaluate_coin_values(@total_coins)
