@@ -6,7 +6,7 @@ RSpec.describe Order, type: :model do
     @order = Order.create
     @order.inserted_coin = InsertedCoin.create #this would be automated in the controller
     @inserted_coin = @order.inserted_coin
-    @order.coin_return = CoinReturn.create #this would be automated in the controller
+
     @dime_1 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
     @dime_2 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
     @dime_3 = Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)
@@ -19,8 +19,6 @@ RSpec.describe Order, type: :model do
     @chips = Product.create(name: "chips", price: 0.50)
     @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
 
-    @order.coin_return = CoinReturn.create
-
   end
 
   it 'creates a new order' do
@@ -29,10 +27,6 @@ RSpec.describe Order, type: :model do
 
   it 'can have inserted coins' do
     expect(@order.inserted_coin).to be_an_instance_of(InsertedCoin)
-  end
-
-  it 'can have a coin return' do
-    expect(@order.coin_return).to be_an_instance_of(CoinReturn)
   end
 
   it 'prompts a user to insert coin if no valid coins have yet been inserted' do

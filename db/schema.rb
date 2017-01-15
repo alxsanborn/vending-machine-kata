@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170114172343) do
 
-  create_table "coin_returns", force: :cascade do |t|
-    t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_coin_returns_on_order_id"
-  end
-
   create_table "coins", force: :cascade do |t|
     t.decimal  "weight"
     t.decimal  "diameter"
@@ -29,10 +22,8 @@ ActiveRecord::Schema.define(version: 20170114172343) do
 
   create_table "dimes", force: :cascade do |t|
     t.integer  "inserted_coin_id"
-    t.integer  "coin_return_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["coin_return_id"], name: "index_dimes_on_coin_return_id"
     t.index ["inserted_coin_id"], name: "index_dimes_on_inserted_coin_id"
   end
 
@@ -46,10 +37,8 @@ ActiveRecord::Schema.define(version: 20170114172343) do
 
   create_table "nickels", force: :cascade do |t|
     t.integer  "inserted_coin_id"
-    t.integer  "coin_return_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["coin_return_id"], name: "index_nickels_on_coin_return_id"
     t.index ["inserted_coin_id"], name: "index_nickels_on_inserted_coin_id"
   end
 
@@ -74,10 +63,8 @@ ActiveRecord::Schema.define(version: 20170114172343) do
 
   create_table "quarters", force: :cascade do |t|
     t.integer  "inserted_coin_id"
-    t.integer  "coin_return_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["coin_return_id"], name: "index_quarters_on_coin_return_id"
     t.index ["inserted_coin_id"], name: "index_quarters_on_inserted_coin_id"
   end
 
