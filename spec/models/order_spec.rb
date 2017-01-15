@@ -91,6 +91,10 @@ RSpec.describe Order, type: :model do
   it 'can return one of each coin' do
     expect(@order.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
   end
+
+  it 'can return multiple coins' do
+    expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
+  end
 #
 # it 'when item is successfully purchased, dispenses change and thanks the user' do
 #   @quarter_1.evaluate_coin_values(@inserted_coin)
@@ -104,9 +108,7 @@ RSpec.describe Order, type: :model do
 
 
 #
-# it 'can return multiple coins' do
-#   expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
-# end
+
 #
 
 end
