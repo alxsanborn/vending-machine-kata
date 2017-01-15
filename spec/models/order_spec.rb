@@ -52,17 +52,18 @@ RSpec.describe Order, type: :model do
     expect(@order.user_message(product)).to eq("THANK YOU")
     expect(product.selected).to eq(false)
   end
-  #
+
   it 'does not dispense a product if product has not been selected' do
     @quarter_1.evaluate_coin_values(@inserted_coin)
     @quarter_2.evaluate_coin_values(@inserted_coin)
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq(0.50)
   end
-  #
-  # it 'does not dispense a product if user has not added enough money' do
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   @chips.update(selected: true)
-  #   expect(@total_coins.user_message).to eq(0.25)
-  # end
+
+  it 'does not dispense a product if user has not added enough money' do
+    @quarter_2.evaluate_coin_values(@inserted_coin)
+    @candy.select_button
+    product = Product.product_selected?
+    expect(@order.user_message(product)).to eq(0.25)
+  end
 end
