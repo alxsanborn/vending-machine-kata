@@ -72,6 +72,10 @@ module Actions
           "nickels" => nickels
         }
       end
+
+      def remainder?(product)
+        inserted_coin.total - product.price
+      end
    end
 
 end

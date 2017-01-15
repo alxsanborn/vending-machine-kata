@@ -12,14 +12,8 @@ class InsertedCoin < ApplicationRecord
   #     "SOLD OUT"
   #   end
   #
-  
-  #   def return_inserted_coins
-  #     {
-  #     "quarters" => self.quarters.length,
-  #     "dimes" => self.dimes.length,
-  #     "nickels" => self.nickels.length
-  #     }
-  #   end
+
+
   #
 
 end

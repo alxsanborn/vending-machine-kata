@@ -15,15 +15,18 @@ class Order < ApplicationRecord
       "THANK YOU"
     end
 
-    def remainder?(product)
-      #binding.pry
-      inserted_coin.total - product.price
+    def return_inserted_coins
+      {
+      "quarters" => self.quarters.length,
+      "dimes" => self.dimes.length,
+      "nickels" => self.nickels.length
+      }
     end
 
     def user_message(product = nil)
       case
-    #   when self.return_coins == true && self.total > 0
-    #     return_inserted_coins
+      when self.return_coins == true && self.total > 0
+        return_inserted_coins
       when self.inserted_coin.total == 0
         insert_coins
     #   when product_selected? && self.total >= product_selected?.price && product_selected?.quantity == 0
