@@ -93,22 +93,18 @@ RSpec.describe Order, type: :model do
   end
 
   it 'can return multiple coins' do
-    expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
+    expect(@order.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
   end
-#
-# it 'when item is successfully purchased, dispenses change and thanks the user' do
-#   @quarter_1.evaluate_coin_values(@inserted_coin)
-#   @quarter_2.evaluate_coin_values(@inserted_coin)
-#   @dime_1.evaluate_coin_values(@inserted_coin)
-#   @dime_2.evaluate_coin_values(@inserted_coin)
-#   @nickel.evaluate_coin_values(@inserted_coin)
-#   @candy.select_button
-#   allow(@order()).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
-# end
 
-
-#
-
-#
+it 'when item is successfully purchased, dispenses change and thanks the user' do
+  @quarter_1.evaluate_coin_values(@inserted_coin)
+  @quarter_2.evaluate_coin_values(@inserted_coin)
+  @dime_1.evaluate_coin_values(@inserted_coin)
+  @dime_2.evaluate_coin_values(@inserted_coin)
+  @nickel.evaluate_coin_values(@inserted_coin)
+  @candy.select_button
+  product = Product.product_selected?
+  allow(@order).to receive(:user_message).with(product).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
+end
 
 end

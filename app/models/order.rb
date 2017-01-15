@@ -1,7 +1,6 @@
 require_relative 'concerns/actions.rb'
 class Order < ApplicationRecord
   has_one :inserted_coin
-  has_one :coin_return
 
   include Actions::InsertedCoin
   include Actions::ProductInstance
@@ -16,9 +15,10 @@ class Order < ApplicationRecord
       "THANK YOU"
     end
 
-    # def remainder?
-    #   self.inserted_coin.total - product.price
-    # end
+    def remainder?(product)
+      #binding.pry
+      inserted_coin.total - product.price
+    end
 
     def user_message(product = nil)
       case
@@ -29,7 +29,7 @@ class Order < ApplicationRecord
     #   when product_selected? && self.total >= product_selected?.price && product_selected?.quantity == 0
     #     sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
-          #make_change(remainder?) if remainder? > 0
+          make_change(remainder?(product)) if remainder?(product) > 0
           product.deselect_button
           thank_you
       else
