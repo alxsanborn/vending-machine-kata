@@ -72,6 +72,10 @@ RSpec.describe Order, type: :model do
     expect(@order.make_change_dimes(0.80)).to eq([8, 0])
   end
 
+  it 'can return nickels as change' do
+    expect(@order.make_change_nickels).to eq(1)
+  end
+
 # it 'when item is successfully purchased, dispenses change and thanks the user' do
 #   @quarter_1.evaluate_coin_values(@total_coins)
 #   @quarter_2.evaluate_coin_values(@total_coins)
@@ -80,15 +84,6 @@ RSpec.describe Order, type: :model do
 #   @nickel.evaluate_coin_values(@total_coins)
 #   @candy.update(selected: true)
 #   allow(@total_coins).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
-# end
-#
-
-#
-
-#
-# it 'can return nickels as change' do
-#   @total_coins.make_change_nickels
-#   expect(@total_coins.coin_return.nickels.length).to eq(1)
 # end
 #
 # it 'can return one coin' do

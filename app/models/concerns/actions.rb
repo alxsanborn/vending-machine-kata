@@ -49,10 +49,10 @@ module Actions
         end
         [dimes, remainder.round(2)]
       end
-  #
-  #     def make_change_nickels
-  #       self.coin_return.nickels.push(Nickel.create)
-  #     end
+
+      def make_change_nickels
+        1
+      end
   #
   #     def make_change(remainder)
   #       remainder = make_change_quarters(remainder)
