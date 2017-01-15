@@ -125,17 +125,18 @@ RSpec.describe Order, type: :model do
     @order.return_coins_button
     expect(@order.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
   end
-  #
-  # it 'returns a coins when the button is pressed even if user has selected an item' do
-  #   @dime_1.evaluate_coin_values(@total_coins)
-  #   @dime_2.evaluate_coin_values(@total_coins)
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   @nickel.evaluate_coin_values(@total_coins)
-  #   @total_coins.update(return_coins: true)
-  #   @chips.update(selected: true)
-  #   expect(@total_coins.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
-  # end
+
+  it 'returns a coins when the button is pressed even if user has selected an item' do
+    @dime_1.evaluate_coin_values(@inserted_coin)
+    @dime_2.evaluate_coin_values(@inserted_coin)
+    @quarter_1.evaluate_coin_values(@inserted_coin)
+    @quarter_2.evaluate_coin_values(@inserted_coin)
+    @nickel.evaluate_coin_values(@inserted_coin)
+    @order.return_coins_button
+    @chips.select_button
+    product = Product.product_selected?
+    expect(@order.user_message(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+  end
   #
   # it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
   #   @total_coins.update(return_coins: true)
