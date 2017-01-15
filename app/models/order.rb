@@ -19,19 +19,17 @@ class Order < ApplicationRecord
       self.update(return_coins: true)
     end
 
-    # def return_inserted_coins
-    #   {
-    #   "quarters" => self.quarters.length,
-    #   "dimes" => self.dimes.length,
-    #   "nickels" => self.nickels.length
-    #   }
-    # end
-
-
+    def return_inserted_coins
+      {
+      "quarters" => self.inserted_coin.quarters.length,
+      "dimes" => self.inserted_coin.dimes.length,
+      "nickels" => self.inserted_coin.nickels.length
+      }
+    end
 
     def user_message(product = nil)
       case
-      when self.return_coins == true && self.total > 0
+      when self.return_coins == true && self.inserted_coin.total > 0
         return_inserted_coins
       when self.inserted_coin.total == 0
         insert_coins
