@@ -38,16 +38,17 @@ module Actions
         [quarters, remainder.round(2)]
       end
 
-  #     def make_change_dimes(remainder)
-  #       while remainder >= 0.10
-  #         remainder -= 0.10
-  #         self.coin_return.dimes.push(Dime.create)
-  #         if remainder < 0.10
-  #           break
-  #         end
-  #       end
-  #       remainder.round(2)
-  #     end
+      def make_change_dimes(remainder)
+        dimes = 0
+        while remainder >= 0.10
+          remainder -= 0.10
+          dimes += 1
+          if remainder < 0.10
+            break
+          end
+        end
+        [dimes, remainder.round(2)]
+      end
   #
   #     def make_change_nickels
   #       self.coin_return.nickels.push(Nickel.create)

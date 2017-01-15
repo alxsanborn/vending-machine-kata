@@ -68,6 +68,10 @@ RSpec.describe Order, type: :model do
     expect(@order.make_change_quarters(0.65)).to eq([2, 0.15])
   end
 
+  it 'can return dimes as change' do
+    expect(@order.make_change_dimes(0.80)).to eq([8, 0])
+  end
+
 # it 'when item is successfully purchased, dispenses change and thanks the user' do
 #   @quarter_1.evaluate_coin_values(@total_coins)
 #   @quarter_2.evaluate_coin_values(@total_coins)
@@ -80,10 +84,7 @@ RSpec.describe Order, type: :model do
 #
 
 #
-# it 'can return dimes as change' do
-#   expect(@total_coins.make_change_dimes(0.80)).to eq(0)
-#   expect(@total_coins.coin_return.dimes.length).to eq(8)
-# end
+
 #
 # it 'can return nickels as change' do
 #   @total_coins.make_change_nickels
