@@ -10,9 +10,6 @@ RSpec.describe InsertedCoin, type: :model do
      @quarter_2 = Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)
      @nickel = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)
      @penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)
-
-  #   @total_coins.coin_return = CoinReturn.create
-  #
    end
 
   it 'returns a value of 0 if no coins have been added' do
@@ -45,51 +42,6 @@ RSpec.describe InsertedCoin, type: :model do
     @nickel.evaluate_coin_values(@inserted_coins)
     expect(@inserted_coins.total).to eq(0.75)
   end
-  #
-  # it 'when item is successfully purchased, dispenses change and thanks the user' do
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   @dime_1.evaluate_coin_values(@total_coins)
-  #   @dime_2.evaluate_coin_values(@total_coins)
-  #   @nickel.evaluate_coin_values(@total_coins)
-  #   @candy.update(selected: true)
-  #   allow(@total_coins).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
-  # end
-  #
-  # it 'can return quarters as change' do
-  #   expect(@total_coins.make_change_quarters(0.65)).to eq(0.15)
-  #   expect(@total_coins.coin_return.quarters.length).to eq(2)
-  # end
-  #
-  # it 'can return dimes as change' do
-  #   expect(@total_coins.make_change_dimes(0.80)).to eq(0)
-  #   expect(@total_coins.coin_return.dimes.length).to eq(8)
-  # end
-  #
-  # it 'can return nickels as change' do
-  #   @total_coins.make_change_nickels
-  #   expect(@total_coins.coin_return.nickels.length).to eq(1)
-  # end
-  #
-  # it 'can return one coin' do
-  #   expect(@total_coins.make_change(0.25)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 0})
-  # end
-  #
-  # it 'can return multiple coins' do
-  #   expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
-  # end
-  #
-  # it 'can return nickels' do
-  #   expect(@total_coins.make_change(0.15)).to eq({"quarters" => 0, "nickels" => 1, "dimes" => 1})
-  # end
-  #
-  # it 'can return multiple quantities of the same coin' do
-  #   expect(@total_coins.make_change(0.50)).to eq({"quarters" => 2, "nickels" => 0, "dimes" => 0})
-  # end
-  #
-  # it 'can return one of each coin' do
-  #   expect(@total_coins.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
-  # end
   #
   # it 'return coins button defaults to false' do
   #   expect(@total_coins.return_coins).to eq(false)

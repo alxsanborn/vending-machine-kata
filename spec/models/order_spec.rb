@@ -18,6 +18,9 @@ RSpec.describe Order, type: :model do
     @cola = Product.create(name: "cola", price: 1.00, quantity: 30)
     @chips = Product.create(name: "chips", price: 0.50)
     @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
+
+    @order.coin_return = CoinReturn.create
+
   end
 
   it 'creates a new order' do
@@ -66,4 +69,50 @@ RSpec.describe Order, type: :model do
     product = Product.product_selected?
     expect(@order.user_message(product)).to eq(0.25)
   end
+
+  it 'can return quarters as change' do
+    expect(@order.make_change_quarters(0.65)).to eq([2, 0.15])
+  end
+
+# it 'when item is successfully purchased, dispenses change and thanks the user' do
+#   @quarter_1.evaluate_coin_values(@total_coins)
+#   @quarter_2.evaluate_coin_values(@total_coins)
+#   @dime_1.evaluate_coin_values(@total_coins)
+#   @dime_2.evaluate_coin_values(@total_coins)
+#   @nickel.evaluate_coin_values(@total_coins)
+#   @candy.update(selected: true)
+#   allow(@total_coins).to receive(:user_message).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
+# end
+#
+
+#
+# it 'can return dimes as change' do
+#   expect(@total_coins.make_change_dimes(0.80)).to eq(0)
+#   expect(@total_coins.coin_return.dimes.length).to eq(8)
+# end
+#
+# it 'can return nickels as change' do
+#   @total_coins.make_change_nickels
+#   expect(@total_coins.coin_return.nickels.length).to eq(1)
+# end
+#
+# it 'can return one coin' do
+#   expect(@total_coins.make_change(0.25)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 0})
+# end
+#
+# it 'can return multiple coins' do
+#   expect(@total_coins.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
+# end
+#
+# it 'can return nickels' do
+#   expect(@total_coins.make_change(0.15)).to eq({"quarters" => 0, "nickels" => 1, "dimes" => 1})
+# end
+#
+# it 'can return multiple quantities of the same coin' do
+#   expect(@total_coins.make_change(0.50)).to eq({"quarters" => 2, "nickels" => 0, "dimes" => 0})
+# end
+#
+# it 'can return one of each coin' do
+#   expect(@total_coins.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
+# end
 end

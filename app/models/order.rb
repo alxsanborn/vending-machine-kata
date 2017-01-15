@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   include Actions::InsertedCoin
   include Actions::ProductInstance
   extend Actions::ProductClass
+  include Actions::ChangeReturn
 
     def insert_coins
       "INSERT COINS"
