@@ -8,12 +8,4 @@ class InsertedCoin < ApplicationRecord
 
   include Actions::InsertedCoin
 
-  #   def sold_out
-  #     "SOLD OUT"
-  #   end
-  #
-
-
-  #
-
 end

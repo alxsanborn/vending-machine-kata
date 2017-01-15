@@ -42,13 +42,4 @@ RSpec.describe InsertedCoin, type: :model do
     @nickel.evaluate_coin_values(@inserted_coins)
     expect(@inserted_coins.total).to eq(0.75)
   end
-  
-  #
-  # it 'tells a user when a product is sold out' do
-  #   @quarter_1.evaluate_coin_values(@total_coins)
-  #   @quarter_2.evaluate_coin_values(@total_coins)
-  #   @dime_1.evaluate_coin_values(@total_coins)
-  #   @chips.update(selected: true)
-  #   expect(@total_coins.user_message).to eq("SOLD OUT")
-  # end
 end

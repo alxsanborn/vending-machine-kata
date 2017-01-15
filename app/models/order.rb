@@ -15,6 +15,10 @@ class Order < ApplicationRecord
       "THANK YOU"
     end
 
+    def sold_out
+      "SOLD OUT"
+    end
+
     def return_coins_button
       self.update(return_coins: true)
     end
@@ -33,8 +37,8 @@ class Order < ApplicationRecord
         return_inserted_coins
       when self.inserted_coin.total == 0
         insert_coins
-    #   when product_selected? && self.total >= product_selected?.price && product_selected?.quantity == 0
-    #     sold_out
+      when product && self.inserted_coin.total >= product.price && product.quantity == 0
+        sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
           make_change(remainder?(product)) if remainder?(product) > 0
           product.deselect_button
