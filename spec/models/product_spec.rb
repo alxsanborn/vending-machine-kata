@@ -41,4 +41,10 @@ RSpec.describe Product, type: :model do
     coffee.deselect_button
     expect(coffee.selected).to be(false)
   end
+
+  it 'can decrease quantity' do
+    coffee.update(quantity: 6)
+    coffee.decrease_product_quantity
+    expect(coffee.quantity).to eq(5)
+  end
 end
