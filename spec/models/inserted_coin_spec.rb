@@ -11,34 +11,47 @@ RSpec.describe InsertedCoin, type: :model do
   let (:nickel) {Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
   let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)}
 
-  it 'returns a value of 0 if no coins have been added' do
-    expect(inserted_coins.total).to eq(0)
-  end
+  describe '#total' do
+    it 'returns a value of 0 if no coins have been added' do
+      expect(inserted_coins.total).to eq(0)
+    end
 
-  it 'returns the value of coins when one coin has been added' do
-    dime_1.evaluate_coin_values(inserted_coins)
-    expect(inserted_coins.total).to eq(0.10)
-  end
+    it 'returns the value of coins when one coin has been added' do
+      dime_1.evaluate_coin_values(inserted_coins)
+      expect(inserted_coins.total).to eq(0.10)
+    end
 
-  it 'returns the value of coins when two different coins have been added' do
-    dime_1.evaluate_coin_values(inserted_coins)
-    quarter_1.evaluate_coin_values(inserted_coins)
-    expect(inserted_coins.total).to eq(0.35)
-  end
+    it 'returns the value of coins when two different coins have been added' do
+      dime_1.evaluate_coin_values(inserted_coins)
+      quarter_1.evaluate_coin_values(inserted_coins)
+      expect(inserted_coins.total).to eq(0.35)
+    end
 
-  it 'returns the value of coins when three different coins have been added' do
-    dime_1.evaluate_coin_values(inserted_coins)
-    quarter_1.evaluate_coin_values(inserted_coins)
-    nickel.evaluate_coin_values(inserted_coins)
-    expect(inserted_coins.total).to eq(0.40)
-  end
+    it 'returns the value of coins when three different coins have been added' do
+      dime_1.evaluate_coin_values(inserted_coins)
+      quarter_1.evaluate_coin_values(inserted_coins)
+      nickel.evaluate_coin_values(inserted_coins)
+      expect(inserted_coins.total).to eq(0.40)
+    end
 
-  it 'returns the value of coins when multiple coins of the same kind have been added' do
-    dime_1.evaluate_coin_values(inserted_coins)
-    dime_2.evaluate_coin_values(inserted_coins)
-    quarter_1.evaluate_coin_values(inserted_coins)
-    quarter_2.evaluate_coin_values(inserted_coins)
-    nickel.evaluate_coin_values(inserted_coins)
-    expect(inserted_coins.total).to eq(0.75)
+    it 'returns the value of coins when multiple coins of the same kind have been added' do
+      dime_1.evaluate_coin_values(inserted_coins)
+      dime_2.evaluate_coin_values(inserted_coins)
+      quarter_1.evaluate_coin_values(inserted_coins)
+      quarter_2.evaluate_coin_values(inserted_coins)
+      nickel.evaluate_coin_values(inserted_coins)
+      expect(inserted_coins.total).to eq(0.75)
+    end
+
+    it 'does not add pennies to valid coin total' do
+      dime_1.evaluate_coin_values(inserted_coins)
+      dime_2.evaluate_coin_values(inserted_coins)
+      dime_3.evaluate_coin_values(inserted_coins)
+      quarter_1.evaluate_coin_values(inserted_coins)
+      quarter_2.evaluate_coin_values(inserted_coins)
+      nickel.evaluate_coin_values(inserted_coins)
+      penny.evaluate_coin_values(inserted_coins)
+      expect(inserted_coins.total).to eq(0.85)
+    end
   end
 end
