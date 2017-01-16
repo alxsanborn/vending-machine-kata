@@ -156,4 +156,8 @@ RSpec.describe Order, type: :model do
     expect(product.quantity).to eq(0)
   end
 
+  it 'prompts a user to insert exact change only when the machine does not have change' do
+    expect(@order.user_message).to eq("EXACT CHANGE ONLY")
+  end
+
 end
