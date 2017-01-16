@@ -37,7 +37,7 @@ class Order < ApplicationRecord
     end
 
     def enough_change?
-      true if InsertedCoin.machine_quarters >= 2 && InsertedCoin.machine_dimes >=2 && InsertedCoin.machine_nickels >= 2
+      true if InsertedCoin.machine_quarters >= 1 && InsertedCoin.machine_dimes >=1 && InsertedCoin.machine_nickels >= 1
     end
 
     def add_quarters_to_machine
