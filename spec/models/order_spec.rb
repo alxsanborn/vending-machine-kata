@@ -18,7 +18,12 @@ RSpec.describe Order, type: :model do
     @cola = Product.create(name: "cola", price: 1.00, quantity: 30)
     @chips = Product.create(name: "chips", price: 0.50)
     @candy = Product.create(name: "candy", price: 0.65, quantity: 5)
+  end
 
+  after(:each) do
+    $total_change["quarters"] = 0
+    $total_change["dimes"] = 0
+    $total_change["nickels"] = 0
   end
 
   it 'creates a new order' do
@@ -29,7 +34,10 @@ RSpec.describe Order, type: :model do
     expect(@order.inserted_coin).to be_an_instance_of(InsertedCoin)
   end
 
-  it 'prompts a user to insert coin if no valid coins have yet been inserted' do
+  it 'prompts a user to insert coin if no valid coins have yet been inserted and there are enough coins in the machne to make change' do
+    $total_change["quarters"] = 2
+    $total_change["dimes"] = 2
+    $total_change["nickels"] = 2
     expect(@order.user_message).to eq("INSERT COINS")
   end
 
@@ -141,7 +149,10 @@ RSpec.describe Order, type: :model do
     expect(product.quantity).to eq(5)
   end
 
-  it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins' do
+  it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins and there are enough coins in the machne to make change' do
+    $total_change["quarters"] = 2
+    $total_change["dimes"] = 2
+    $total_change["nickels"] = 2
     @order.return_coins_button
     expect(@order.user_message).to eq("INSERT COINS")
   end

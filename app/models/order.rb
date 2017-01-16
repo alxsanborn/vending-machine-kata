@@ -43,7 +43,6 @@ class Order < ApplicationRecord
     end
 
     def user_message(product = nil)
-      binding.pry
       case
       when self.return_coins == true && self.inserted_coin.total > 0
         return_inserted_coins
