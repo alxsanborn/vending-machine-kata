@@ -86,22 +86,37 @@ RSpec.describe Order, type: :model do
 
   it 'can return one coin' do
     expect(order.make_change(0.25)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 0})
+    expect(InsertedCoin.machine_quarters).to eq(1)
+    expect(InsertedCoin.machine_dimes).to eq(2)
+    expect(InsertedCoin.machine_nickels).to eq(2)
   end
 
   it 'can return nickels' do
     expect(order.make_change(0.15)).to eq({"quarters" => 0, "nickels" => 1, "dimes" => 1})
+    expect(InsertedCoin.machine_quarters).to eq(2)
+    expect(InsertedCoin.machine_dimes).to eq(1)
+    expect(InsertedCoin.machine_nickels).to eq(1)
   end
 
   it 'can return multiple quantities of the same coin' do
     expect(order.make_change(0.50)).to eq({"quarters" => 2, "nickels" => 0, "dimes" => 0})
+    expect(InsertedCoin.machine_quarters).to eq(0)
+    expect(InsertedCoin.machine_dimes).to eq(2)
+    expect(InsertedCoin.machine_nickels).to eq(2)
   end
 
   it 'can return one of each coin' do
     expect(order.make_change(0.40)).to eq({"quarters" => 1, "nickels" => 1, "dimes" => 1})
+    expect(InsertedCoin.machine_quarters).to eq(1)
+    expect(InsertedCoin.machine_dimes).to eq(1)
+    expect(InsertedCoin.machine_nickels).to eq(1)
   end
 
   it 'can return multiple coins' do
     expect(order.make_change(0.35)).to eq({"quarters" => 1, "nickels" => 0, "dimes" => 1})
+    expect(InsertedCoin.machine_quarters).to eq(1)
+    expect(InsertedCoin.machine_dimes).to eq(1)
+    expect(InsertedCoin.machine_nickels).to eq(2)
   end
 
   it 'when item is successfully purchased, dispenses change and thanks the user' do
