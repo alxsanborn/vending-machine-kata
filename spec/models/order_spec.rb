@@ -19,9 +19,7 @@ RSpec.describe Order, type: :model do
   end
 
   after(:each) do
-    $total_change["quarters"] = 0
-    $total_change["dimes"] = 0
-    $total_change["nickels"] = 0
+
   end
 
   it 'creates a new order' do
@@ -33,10 +31,13 @@ RSpec.describe Order, type: :model do
   end
 
   it 'prompts a user to insert coin if no valid coins have yet been inserted and there are enough coins in the machne to make change' do
-    $total_change["quarters"] = 2
-    $total_change["dimes"] = 2
-    $total_change["nickels"] = 2
+    InsertedCoin.machine_quarters = 2
+    InsertedCoin.machine_dimes = 2
+    InsertedCoin.machine_nickels = 2
     expect(order.user_message).to eq("INSERT COINS")
+    InsertedCoin.machine_quarters = 0
+    InsertedCoin.machine_dimes = 0
+    InsertedCoin.machine_nickels = 0
   end
 
   it 'returns the current balance if valid coins have been inserted' do
@@ -148,11 +149,14 @@ RSpec.describe Order, type: :model do
   end
 
   it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins and there are enough coins in the machne to make change' do
-    $total_change["quarters"] = 2
-    $total_change["dimes"] = 2
-    $total_change["nickels"] = 2
+    InsertedCoin.machine_quarters = 2
+    InsertedCoin.machine_dimes = 2
+    InsertedCoin.machine_nickels = 2
     order.return_coins_button
     expect(order.user_message).to eq("INSERT COINS")
+    InsertedCoin.machine_quarters = 0
+    InsertedCoin.machine_dimes = 0
+    InsertedCoin.machine_nickels = 0
   end
 
   it 'tells a user when a product is sold out' do

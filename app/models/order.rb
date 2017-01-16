@@ -1,5 +1,4 @@
 require_relative 'concerns/actions.rb'
-require_relative 'concerns/total_change.rb'
 
 class Order < ApplicationRecord
   has_one :inserted_coin
@@ -8,7 +7,6 @@ class Order < ApplicationRecord
   include Actions::ProductInstance
   extend Actions::ProductClass
   include Actions::ChangeReturn
-  include TotalChange
 
     def insert_coins
       "INSERT COINS"
@@ -39,7 +37,7 @@ class Order < ApplicationRecord
     end
 
     def enough_change?
-      true if $total_change["quarters"] >= 2 && $total_change["dimes"] >=2 && $total_change["nickels"] >= 2
+      true if InsertedCoin.machine_quarters >= 2 && InsertedCoin.machine_dimes >=2 && InsertedCoin.machine_nickels >= 2
     end
 
     def user_message(product = nil)
