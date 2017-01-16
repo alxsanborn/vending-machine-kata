@@ -32,9 +32,9 @@ class Order < ApplicationRecord
 
     def return_inserted_coins
       {
-      "quarters" => self.inserted_coin.quarters.length,
-      "dimes" => self.inserted_coin.dimes.length,
-      "nickels" => self.inserted_coin.nickels.length
+      "quarters" => self.inserted_coin.quarters,
+      "dimes" => self.inserted_coin.dimes,
+      "nickels" => self.inserted_coin.nickels
       }
     end
 

@@ -27,15 +27,15 @@ class Coin < ApplicationRecord
   validates_presence_of :weight, :diameter, :thickness
 
   def dime(user_coins)
-    user_coins.dimes << Dime.new
+    user_coins.dimes += 1
   end
 
   def nickel(user_coins)
-    user_coins.nickels << Nickel.new
+    user_coins.nickels += 1
   end
 
   def quarter(user_coins)
-    user_coins.quarters << Quarter.new
+    user_coins.quarters += 1
   end
 
   def evaluate_coin_values(user_coins)

@@ -17,7 +17,7 @@ RSpec.describe Order, type: :model do
   before (:each) do
     order.inserted_coin = inserted_coins
   end
-  
+
   after(:each) do
     $total_change["quarters"] = 0
     $total_change["dimes"] = 0

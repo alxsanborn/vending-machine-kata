@@ -1,3 +1,0 @@
-class Penny < ApplicationRecord
-
-end
