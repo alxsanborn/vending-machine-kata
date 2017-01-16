@@ -127,9 +127,12 @@ RSpec.describe Order, type: :model do
     nickel.evaluate_coin_values(inserted_coins)
     candy.select_button
     product = Product.product_selected?
+    order.user_message(product)
     allow(order).to receive(:user_message).with(product).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
+    expect(InsertedCoin.machine_quarters).to eq(4)
+    expect(InsertedCoin.machine_dimes).to eq(3)
+    expect(InsertedCoin.machine_nickels).to eq(3)
   end
-
 
   it 'return coins button defaults to false' do
     expect(order.return_coins).to eq(false)

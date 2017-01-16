@@ -40,6 +40,18 @@ class Order < ApplicationRecord
       true if InsertedCoin.machine_quarters >= 2 && InsertedCoin.machine_dimes >=2 && InsertedCoin.machine_nickels >= 2
     end
 
+    def add_quarters_to_machine
+      InsertedCoin.machine_quarters += self.inserted_coin.quarters
+    end
+
+    def add_dimes_to_machine
+      InsertedCoin.machine_dimes += self.inserted_coin.dimes
+    end
+
+    def add_nickels_to_machine
+      InsertedCoin.machine_nickels += self.inserted_coin.nickels
+    end
+
     def user_message(product = nil)
       case
       when self.return_coins == true && self.inserted_coin.total > 0
@@ -52,6 +64,9 @@ class Order < ApplicationRecord
         sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
         make_change(remainder?(product)) if remainder?(product) > 0
+        add_quarters_to_machine
+        add_dimes_to_machine
+        add_nickels_to_machine
         product.decrease_product_quantity
         product.deselect_button
         thank_you
