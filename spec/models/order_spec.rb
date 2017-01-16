@@ -14,8 +14,11 @@ RSpec.describe Order, type: :model do
   let(:chips) {Product.create(name: "chips", price: 0.50)}
   let(:candy) {Product.create(name: "candy", price: 0.65, quantity: 5)}
 
-  before (:each) do
+  before do
     order.inserted_coin = inserted_coins
+  end
+
+  before(:each) do
     InsertedCoin.machine_quarters = 2
     InsertedCoin.machine_dimes = 2
     InsertedCoin.machine_nickels = 2
