@@ -149,7 +149,7 @@ RSpec.describe Order, type: :model do
     quarter_2.evaluate_coin_values(inserted_coins)
     nickel.evaluate_coin_values(inserted_coins)
     order.return_coins_button
-    expect(order.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+    expect(order.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1, "pennies" => 0})
   end
 
   it 'returns a coins when the button is pressed even if user has selected an item' do
@@ -161,7 +161,7 @@ RSpec.describe Order, type: :model do
     order.return_coins_button
     candy.select_button
     product = Product.product_selected?
-    expect(order.user_message(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+    expect(order.user_message(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1, "pennies" => 0})
     expect(product.quantity).to eq(5)
   end
 
@@ -187,4 +187,9 @@ RSpec.describe Order, type: :model do
     expect(order.user_message).to eq("EXACT CHANGE ONLY")
   end
 
+  it 'rejects pennies' do
+      penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
+      penny.evaluate_coin_values(inserted_coins)
+      expect(order.user_message).to eq({"pennies" => 1})
+  end
 end

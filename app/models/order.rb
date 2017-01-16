@@ -32,7 +32,8 @@ class Order < ApplicationRecord
       {
       "quarters" => self.inserted_coin.quarters,
       "dimes" => self.inserted_coin.dimes,
-      "nickels" => self.inserted_coin.nickels
+      "nickels" => self.inserted_coin.nickels,
+      "pennies" => self.inserted_coin.pennies
       }
     end
 
@@ -52,10 +53,18 @@ class Order < ApplicationRecord
       InsertedCoin.machine_nickels += self.inserted_coin.nickels
     end
 
+    def return_pennies
+      {
+        "pennies" => self.inserted_coin.pennies
+      }
+    end
+
     def user_message(product = nil)
       case
       when self.return_coins == true && self.inserted_coin.total > 0
         return_inserted_coins
+      when self.inserted_coin.pennies > 0
+        return_pennies
       when self.inserted_coin.total == 0 && enough_change?
         insert_coins
       when self.inserted_coin.total == 0

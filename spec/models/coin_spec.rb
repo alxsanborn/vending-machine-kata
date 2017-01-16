@@ -9,7 +9,7 @@ RSpec.describe Coin, type: :model do
   let (:quarter_1) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
   let (:quarter_2) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
   let (:nickel) {Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
-  let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)}
+  let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)}
   it 'can create a new coin' do
     expect(dime_1).to be_valid
   end
