@@ -3,7 +3,7 @@ require_relative 'concerns/actions.rb'
 class InsertedCoin < ApplicationRecord
   belongs_to :order
 
-  include Actions::InsertedCoin
+  include Actions::InsertedCoins
 
   @@machine_quarters = 0
   @@machine_dimes = 0

@@ -1,6 +1,6 @@
 module Actions
 
-  module InsertedCoin
+  module InsertedCoins
     def total
       ((dimes*0.1) + (nickels*0.05) + (quarters*0.25)).round(2)
     end
@@ -39,6 +39,7 @@ module Actions
             break
           end
         end
+        InsertedCoin.machine_quarters -= quarters
         [quarters, remainder.round(2)]
       end
 
@@ -51,11 +52,13 @@ module Actions
             break
           end
         end
+        InsertedCoin.machine_dimes -= dimes
         [dimes, remainder.round(2)]
       end
 
       def make_change_nickels(remainder)
         if remainder > 0
+          InsertedCoin.machine_nickels -= 1
           1
         else 0
         end

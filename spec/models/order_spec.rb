@@ -19,7 +19,9 @@ RSpec.describe Order, type: :model do
   end
 
   after(:each) do
-
+    InsertedCoin.machine_quarters = 2
+    InsertedCoin.machine_dimes = 2
+    InsertedCoin.machine_nickels = 2
   end
 
   it 'creates a new order' do
@@ -31,13 +33,7 @@ RSpec.describe Order, type: :model do
   end
 
   it 'prompts a user to insert coin if no valid coins have yet been inserted and there are enough coins in the machne to make change' do
-    InsertedCoin.machine_quarters = 2
-    InsertedCoin.machine_dimes = 2
-    InsertedCoin.machine_nickels = 2
     expect(order.user_message).to eq("INSERT COINS")
-    InsertedCoin.machine_quarters = 0
-    InsertedCoin.machine_dimes = 0
-    InsertedCoin.machine_nickels = 0
   end
 
   it 'returns the current balance if valid coins have been inserted' do
@@ -74,15 +70,18 @@ RSpec.describe Order, type: :model do
   end
 
   it 'can return quarters as change' do
-    expect(order.make_change_quarters(0.65)).to eq([2, 0.15])
+    expect(order.make_change_quarters(0.40)).to eq([1, 0.15])
+    expect(InsertedCoin.machine_quarters).to eq(1)
   end
 
   it 'can return dimes as change' do
-    expect(order.make_change_dimes(0.80)).to eq([8, 0])
+    expect(order.make_change_dimes(0.20)).to eq([2, 0])
+    expect(InsertedCoin.machine_dimes).to eq(0)
   end
 
   it 'can return nickels as change' do
     expect(order.make_change_nickels(0.05)).to eq(1)
+    expect(InsertedCoin.machine_nickels).to eq(1)
   end
 
   it 'can return one coin' do
@@ -149,14 +148,8 @@ RSpec.describe Order, type: :model do
   end
 
   it 'does not dispense change and prompts a user to insert coins if a user has not inserted any coins and there are enough coins in the machne to make change' do
-    InsertedCoin.machine_quarters = 2
-    InsertedCoin.machine_dimes = 2
-    InsertedCoin.machine_nickels = 2
     order.return_coins_button
     expect(order.user_message).to eq("INSERT COINS")
-    InsertedCoin.machine_quarters = 0
-    InsertedCoin.machine_dimes = 0
-    InsertedCoin.machine_nickels = 0
   end
 
   it 'tells a user when a product is sold out' do
@@ -170,6 +163,9 @@ RSpec.describe Order, type: :model do
   end
 
   it 'prompts a user to insert exact change only when the machine does not have change' do
+    InsertedCoin.machine_quarters = 0
+    InsertedCoin.machine_dimes = 0
+    InsertedCoin.machine_nickels = 0
     expect(order.user_message).to eq("EXACT CHANGE ONLY")
   end
 

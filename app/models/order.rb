@@ -3,7 +3,7 @@ require_relative 'concerns/actions.rb'
 class Order < ApplicationRecord
   has_one :inserted_coin
 
-  include Actions::InsertedCoin
+  include Actions::InsertedCoins
   include Actions::ProductInstance
   extend Actions::ProductClass
   include Actions::ChangeReturn
@@ -51,10 +51,10 @@ class Order < ApplicationRecord
       when product && self.inserted_coin.total >= product.price && product.quantity == 0
         sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
-          make_change(remainder?(product)) if remainder?(product) > 0
-          product.decrease_product_quantity
-          product.deselect_button
-          thank_you
+        make_change(remainder?(product)) if remainder?(product) > 0
+        product.decrease_product_quantity
+        product.deselect_button
+        thank_you
       else
           self.inserted_coin.value = self.inserted_coin.total
           self.inserted_coin.value
