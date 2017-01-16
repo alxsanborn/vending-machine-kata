@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170114172343) do
     t.integer  "quarters",   default: 0
     t.integer  "dimes",      default: 0
     t.integer  "nickels",    default: 0
+    t.integer  "pennies",    default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["order_id"], name: "index_inserted_coins_on_order_id"

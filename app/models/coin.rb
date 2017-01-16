@@ -38,6 +38,10 @@ class Coin < ApplicationRecord
     user_coins.quarters += 1
   end
 
+  def penny(user_coins)
+    user_coins.pennies += 1
+  end
+
   def evaluate_coin_values(user_coins)
       COIN_STANDARDS.each{ |coin|
         if (self.thickness - coin["thickness"]).between?(-0.002, 0.002) && (self.diameter - coin["diameter"]).between?(-0.002, 0.002) && (self.weight - coin["weight"]).between?(-0.002, 0.002)

@@ -46,6 +46,11 @@ RSpec.describe Coin, type: :model do
     expect(valid_coins.quarters).to eq(1)
   end
 
+  it 'can add pennies' do
+    penny.penny(valid_coins)
+    expect(valid_coins.pennies).to eq(1)
+  end
+
   it 'can identify and add a dime to a user`s total coins' do
     dime_1.evaluate_coin_values(valid_coins)
     expect(valid_coins.dimes).to eq(1)
