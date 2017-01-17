@@ -1,0 +1,2 @@
+class InsertedCoinsController < ApplicationController
+end
