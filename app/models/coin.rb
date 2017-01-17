@@ -26,6 +26,7 @@ COIN_STANDARDS = [
 class Coin < ApplicationRecord
   validates_presence_of :weight, :diameter, :thickness
 
+  #I used the attribute feature and increased the quantity for each coin identified, rather than added the actual coin object to inserted_coin because later when I have to calculate the total, it is faster to just take the count of the attribute, rather than to iterate over each coin object, check whether the name matches "dime," "nickel," or "penny" and add to the total from there.
   def dime(user_coins)
     user_coins.dimes += 1
   end
