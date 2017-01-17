@@ -1,13 +1,15 @@
-
-<% @products.each {|product| %>
-
-
-<div class="card">
-  <%=image_tag(product.product_image.url(:med))%>
-  <div class="card-block">
-    <p class="card-text"><%= product.name %></p>
-    <p class="card-text">$<%= product.price %></p>
+<div class="container">
+  <div class="row">
+    <% @products.each {|product| %>
+      <div class="col">
+        <div class="card">
+          <%=image_tag(product.product_image.url(:med))%>
+          <div class="card-block">
+            <p class="card-text"><%= product.name %></p>
+            <p class="card-text">$<%= product.price %></p>
+          </div>
+        </div>
+     </div>
+    <%}%>
   </div>
 </div>
-
-<%}%>
