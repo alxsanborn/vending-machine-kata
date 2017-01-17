@@ -6,6 +6,5 @@ class InsertedCoinsController < ApplicationController
   end
 
   def show
-    @inserted_coin = InsertedCoin.find(params[:id])
   end
 end
