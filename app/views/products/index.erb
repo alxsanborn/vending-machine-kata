@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <% @products.each {|product| %>
-      <div class="col">
+      <div class="col-sm-12 col-md-4">
         <div class="card" style="width: 8rem;">
           <%=image_tag(product.product_image.url(:med))%>
           <div class="card-block">
