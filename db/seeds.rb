@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-cola = Product.create(name: "cola", price: 1.00, quantity: 30)
-chips = Product.create(name: "chips", price: 0.50)
-candy = Product.create(name: "candy", price: 0.65, quantity: 5)
+cola = Product.create(name: "cola", price: 1.00, quantity: 30, product_image: File.new("app/assets/images/cola.jpeg"))
+chips = Product.create(name: "chips", price: 0.50, product_image:  File.new("app/assets/images/chips.png"))
+candy = Product.create(name: "candy", price: 0.65, quantity: 5, product_image: File.new("app/assets/images/candy.jpeg"))
 
 order = Order.create
 
