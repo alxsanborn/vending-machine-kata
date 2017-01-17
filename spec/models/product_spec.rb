@@ -18,6 +18,10 @@ RSpec.describe Product, type: :model do
       free_cheetos = Product.create(name: 'cheetos')
       expect(free_cheetos).to_not be_valid
     end
+
+    it 'can have an image' do
+      coffee.product_image = File.new("app/assets/images/coffee.jpg")
+    end
   end
 
   context 'default values' do
