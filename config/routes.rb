@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :products
   resources :coins
   resources :inserted_coins
+
+  root 'orders#new'
 end
