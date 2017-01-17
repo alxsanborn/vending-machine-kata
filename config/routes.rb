@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :coins
   resources :inserted_coins
 
-  root 'orders#new'
+  root 'products#index'
 end
