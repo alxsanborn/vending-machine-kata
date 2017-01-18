@@ -6,7 +6,7 @@
           <%=image_tag(product.product_image.url(:med))%>
           <div class="card-block">
             <p class="card-text"><%= product.name %></p>
-            <p class="card-text">$<%= product.price %></p>
+            <p class="card-text">$<%= '%.2f' % product.price %></p>
           </div>
         </div>
      </div>
