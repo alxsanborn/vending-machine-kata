@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :products, except: [:destroy, :edit, :update]
   resources :orders, only: [:show, :new, :create]
   resources :coins, only: [:show, :new, :create]
-  resources :inserted_coins
-end
+  resources :inserted_coins, except: :destroy
+
+  end
