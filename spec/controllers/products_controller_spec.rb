@@ -16,4 +16,8 @@ RSpec.describe ProductsController, :type => :routing do
   it "routes to /products/create" do
     expect(:post => "/products").to be_routable
   end
+
+  it "does not delete products" do
+    expect(:delete => "/products/:id").to_not be_routable
+  end
 end
