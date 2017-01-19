@@ -21,7 +21,7 @@ RSpec.describe CoinsController, :type => :routing do
     expect(:put => "/inserted_coins/:id").to be_routable
   end
 
-  it "does not delete inserted_coi s" do
+  it "does not delete inserted_coins" do
     expect(:delete => "/inserted_coins/:id").to_not be_routable
   end
 end
