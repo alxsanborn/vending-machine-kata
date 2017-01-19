@@ -12,4 +12,8 @@ RSpec.describe ProductsController, :type => :routing do
   it "routes to /products/new" do
     expect(:get => "/products/new").to be_routable
   end
+
+  it "routes to /products/create" do
+    expect(:post => "/products").to be_routable
+  end
 end
