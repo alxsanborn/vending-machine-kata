@@ -28,4 +28,11 @@ RSpec.describe ProductsController, :type => :routing do
   it "does not edit a product" do
     expect(:put => "/products/:id").to_not be_routable
   end
+
+  it 'root renders the :index template' do
+    expect(:get => '/').to route_to(
+      controller: "products",
+      action: "index"
+    )
+  end
 end

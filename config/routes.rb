@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :coins, only: [:show, :new, :create]
   resources :inserted_coins, except: :destroy
 
+  root 'products#index'
+
   end
