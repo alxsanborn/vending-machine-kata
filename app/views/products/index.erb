@@ -1,4 +1,113 @@
+<div class="container">
+  <div class="row">
+    <% @products.each {|product| %>
+      <div class="col-sm-12 col-md-4">
+        <div class="card" style="width: 7rem;">
+          <%=image_tag(product.product_image.url(:med))%>
+          <div class="card-block">
+            <p class="card-text"><%= product.name %></p>
+            <p class="card-text">$<%= '%.2f' % product.price %></p>
+          </div>
+        </div>
+     </div>
+    <%}%>
+  </div>
 
-<% @products.each {|product| %>
-    <%= product.name %>
-<%}%>
+  <div class="row">
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("quarter.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("quarter.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("quarter.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("quarter.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+     <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("dime.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("nickel.png", :class => "coin") %>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("nickel.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("nickel.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("nickel.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("nickel.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("nickel.png", :class => "coin") %>
+      </a>
+    </div>
+    <div class="col-md-2">
+      <a href="#">
+        <%= image_tag("penny.png", :class => "coin") %>
+      </a>
+    </div>
+  </div>
+
+</div>
