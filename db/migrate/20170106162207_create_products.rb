@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.decimal :price
       t.integer :quantity, :default => 0
       t.boolean :selected, :default => false
+      t.attachment :product_image
       t.timestamps
     end
   end

@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
-  let (:coffee) {Product.create(name: "coffee", price: 1.00)}
+  let (:cola) {Product.create(name: "cola", price: 1.00, product_image: File.new("app/assets/images/cola.jpeg"))}
 
   context 'validations' do
     it 'can create a new product with name and price' do
-      expect(coffee).to be_valid
+      expect(cola).to be_valid
     end
 
     it 'cannot be created without name' do
@@ -18,45 +18,49 @@ RSpec.describe Product, type: :model do
       free_cheetos = Product.create(name: 'cheetos')
       expect(free_cheetos).to_not be_valid
     end
+
+    it 'can have an image' do
+      allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
+    end
   end
 
   context 'default values' do
     it 'selected attribute defaults to false' do
-      expect(coffee.selected).to be(false)
+      expect(cola.selected).to be(false)
     end
 
     it 'quantity defaults to 0' do
-      expect(coffee.quantity).to eq(0)
+      expect(cola.quantity).to eq(0)
     end
   end
 
   describe '#select_button' do
     it 'user can select a product' do
-      coffee.select_button
-      expect(coffee.selected).to be(true)
+      cola.select_button
+      expect(cola.selected).to be(true)
     end
   end
 
   describe '.product_selected?' do
     it 'can detect which products are selected' do
-      coffee.select_button
-      expect(Product.product_selected?).to eq(coffee)
+      cola.select_button
+      expect(Product.product_selected?).to eq(cola)
     end
   end
 
   describe '#deselect_button' do
     it 'can deselect a product' do
-      coffee.select_button
-      coffee.deselect_button
-      expect(coffee.selected).to be(false)
+      cola.select_button
+      cola.deselect_button
+      expect(cola.selected).to be(false)
     end
   end
 
   describe '#decrease_product_quantity' do
     it 'can decrease quantity' do
-      coffee.update(quantity: 6)
-      coffee.decrease_product_quantity
-      expect(coffee.quantity).to eq(5)
+      cola.update(quantity: 6)
+      cola.decrease_product_quantity
+      expect(cola.quantity).to eq(5)
     end
   end
 end
