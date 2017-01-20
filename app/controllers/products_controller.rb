@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def index
+    current_order
     @products = Product.all
   end
 

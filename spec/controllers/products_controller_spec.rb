@@ -42,6 +42,8 @@ RSpec.describe ProductsController, :type => :controller do
     it 'renders the index template' do
       get :index
       expect(response).to render_template("index")
+      expect(request.session[:order_id]).to be_an_instance_of(Order)
+      expect(request.session[:order_id].inserted_coin).to be_an_instance_of(InsertedCoin)
     end
   end
 
