@@ -10,7 +10,7 @@
 
   <body>
     <nav class="navbar navbar-light bg-faded">
-      <span>Vending Machine | <%=current_order.user_message%></span>
+      <span>Vending Machine | <%='%.2f' % current_order.user_message%></span>
     </nav>
     <%= yield %>
 
