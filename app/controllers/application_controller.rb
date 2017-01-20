@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
  def current_order
-   @current_order = session[:order_id] ||= Order.create(inserted_coin: InsertedCoin.create)
+   session[:order_id] ||= Order.create(inserted_coin: InsertedCoin.create)
  end
 end
