@@ -25,6 +25,8 @@ COIN_STANDARDS = [
 
 class Coin < ApplicationRecord
   validates_presence_of :weight, :diameter, :thickness
+  has_attached_file :coin_image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+  validates_attachment_content_type :coin_image, content_type: /\Aimage\/.*\z/
 
   def dime(user_coins)
     user_coins.dimes += 1

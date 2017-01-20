@@ -4,6 +4,7 @@ class CreateCoins < ActiveRecord::Migration[5.0]
       t.decimal :weight
       t.decimal :diameter
       t.decimal :thickness
+      t.attachment :coin_image
 
       t.timestamps
     end

@@ -16,8 +16,12 @@ ActiveRecord::Schema.define(version: 20170114172343) do
     t.decimal  "weight"
     t.decimal  "diameter"
     t.decimal  "thickness"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "coin_image_file_name"
+    t.string   "coin_image_content_type"
+    t.integer  "coin_image_file_size"
+    t.datetime "coin_image_updated_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "inserted_coins", force: :cascade do |t|
