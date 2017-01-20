@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
   def index
     current_order
     @products = Product.all
+    @coins = Coin.all
   end
 
   def show
