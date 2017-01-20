@@ -18,5 +18,11 @@ RSpec.describe SessionsController, :type => :controller do
       expect(request.session["order_id"]).to eq(1)
       expect(Order.count).to eq(1)
     end
+
+    it 'associates inserted coin with order' do
+      post :create
+      order = Order.find(request.session["order_id"])
+      expect(order.inserted_coin).to be_an_instance_of(InsertedCoin)
+    end
   end
 end
