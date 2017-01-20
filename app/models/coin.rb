@@ -30,18 +30,22 @@ class Coin < ApplicationRecord
 
   def dime(user_coins)
     user_coins.dimes += 1
+    user_coins.save
   end
 
   def nickel(user_coins)
     user_coins.nickels += 1
+    user_coins.save
   end
 
   def quarter(user_coins)
     user_coins.quarters += 1
+    user_coins.save
   end
 
   def penny(user_coins)
     user_coins.pennies += 1
+    user_coins.save
   end
 
   def evaluate_coin_values(user_coins)
