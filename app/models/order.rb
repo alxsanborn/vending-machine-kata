@@ -37,6 +37,13 @@ class Order < ApplicationRecord
       }
     end
 
+    def reset_coin_amounts
+      self.inserted_coin.quarters = 0
+      self.inserted_coin.dimes = 0
+      self.inserted_coin.nickels = 0
+      self.inserted_coin.pennies = 0
+    end
+
     def enough_change?
       true if InsertedCoin.machine_quarters >= 1 && InsertedCoin.machine_dimes >=1 && InsertedCoin.machine_nickels >= 1
     end

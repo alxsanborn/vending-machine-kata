@@ -193,5 +193,17 @@ RSpec.describe Order, type: :model do
       order.return_coins_button
       expect(order.user_message).to eq("INSERT COINS")
     end
+
+    describe '#reset_coin_amounts' do
+      it 'resets inserted_coin amounts to 0 when return coins button has been pressed' do
+        dime_1.evaluate_coin_values(inserted_coins)
+        quarter_1.evaluate_coin_values(inserted_coins)
+        nickel.evaluate_coin_values(inserted_coins)
+        order.reset_coin_amounts
+        expect(order.inserted_coin.quarters).to eq(0)
+        expect(order.inserted_coin.dimes).to eq(0)
+        expect(order.inserted_coin.nickels).to eq(0)
+      end
+    end
   end
 end
