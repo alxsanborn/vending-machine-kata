@@ -29,19 +29,17 @@ class Order < ApplicationRecord
     end
 
     def return_inserted_coins
-      {
-      "quarters" => self.inserted_coin.quarters,
-      "dimes" => self.inserted_coin.dimes,
-      "nickels" => self.inserted_coin.nickels,
-      "pennies" => self.inserted_coin.pennies
+      coins = {
+        "quarters" => self.inserted_coin.quarters,
+        "dimes" => self.inserted_coin.dimes,
+        "nickels" => self.inserted_coin.nickels,
       }
+      reset_coin_amounts
+      return coins
     end
 
     def reset_coin_amounts
-      self.inserted_coin.quarters = 0
-      self.inserted_coin.dimes = 0
-      self.inserted_coin.nickels = 0
-      self.inserted_coin.pennies = 0
+      self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0)
     end
 
     def enough_change?
@@ -61,17 +59,23 @@ class Order < ApplicationRecord
     end
 
     def return_pennies
-      {
-        "pennies" => self.inserted_coin.pennies
-      }
+      {"pennies" => self.inserted_coin.pennies}
+    end
+
+    def coin_return(product=nil)
+      case
+      when self.return_coins == true && self.inserted_coin.total > 0
+        product.deselect_button if product
+        return_inserted_coins
+      when self.inserted_coin.pennies > 0
+        return_pennies
+      when product && self.inserted_coin.total >= product.price && product.quantity > 0
+        make_change(remainder?(product)) if remainder?(product) > 0
+      end
     end
 
     def user_message(product = nil)
       case
-      when self.return_coins == true && self.inserted_coin.total > 0
-        return_inserted_coins
-      when self.inserted_coin.pennies > 0
-        return_pennies
       when self.inserted_coin.total == 0 && enough_change?
         insert_coins
       when self.inserted_coin.total == 0
@@ -79,7 +83,6 @@ class Order < ApplicationRecord
       when product && self.inserted_coin.total >= product.price && product.quantity == 0
         sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
-        make_change(remainder?(product)) if remainder?(product) > 0
         add_quarters_to_machine
         add_dimes_to_machine
         add_nickels_to_machine
@@ -87,8 +90,8 @@ class Order < ApplicationRecord
         product.deselect_button
         thank_you
       else
-          self.inserted_coin.value = self.inserted_coin.total
-          self.inserted_coin.value
+        self.inserted_coin.value = self.inserted_coin.total
+        self.inserted_coin.value
        end
      end
-end
+   end

@@ -37,12 +37,14 @@ RSpec.describe Order, type: :model do
   context 'no valid coins have been added' do
     it 'prompts a user to insert coin if there are enough coins in the machine to make change' do
       expect(order.user_message).to eq("INSERT COINS")
+      expect(order.coin_return).to eq(nil)
     end
 
     it 'rejects pennies' do
         penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
         penny.evaluate_coin_values(inserted_coins)
-        expect(order.user_message).to eq({"pennies" => 1})
+        expect(order.user_message).to eq("INSERT COINS")
+        expect(order.coin_return).to eq({"pennies"=>1})
     end
 
     it 'prompts a user to insert exact change only when the machine does not have change' do
@@ -50,6 +52,7 @@ RSpec.describe Order, type: :model do
       InsertedCoin.machine_dimes = 0
       InsertedCoin.machine_nickels = 0
       expect(order.user_message).to eq("EXACT CHANGE ONLY")
+      expect(order.coin_return).to eq(nil)
     end
   end
 
@@ -58,6 +61,7 @@ RSpec.describe Order, type: :model do
       quarter_1.evaluate_coin_values(inserted_coins)
       quarter_2.evaluate_coin_values(inserted_coins)
       expect(order.user_message).to eq(0.5)
+      expect(order.coin_return).to eq(nil)
     end
   end
 
@@ -67,6 +71,7 @@ RSpec.describe Order, type: :model do
       quarter_2.evaluate_coin_values(inserted_coins)
       product = Product.product_selected?
       expect(order.user_message(product)).to eq(0.50)
+      expect(order.coin_return).to eq(nil)
     end
 
     it 'does not dispense a product if user has not added enough money' do
@@ -75,6 +80,7 @@ RSpec.describe Order, type: :model do
       product = Product.product_selected?
       expect(order.user_message(product)).to eq(0.25)
       expect(product.quantity).to eq(5)
+      expect(order.coin_return).to eq(nil)
     end
 
     it 'when item is successfully purchased, dispenses change and thanks the user' do
@@ -85,8 +91,8 @@ RSpec.describe Order, type: :model do
       nickel.evaluate_coin_values(inserted_coins)
       candy.select_button
       product = Product.product_selected?
-      order.user_message(product)
-      allow(order).to receive(:user_message).with(product).and_return({"quarters" => 0, "nickels" => 0, "dimes" => 1}, "THANK YOU")
+      expect(order.coin_return(product)).to eq({"quarters" => 0, "nickels" => 0, "dimes" => 1})
+      expect(order.user_message(product)).to eq("THANK YOU")
       expect(InsertedCoin.machine_quarters).to eq(4)
       expect(InsertedCoin.machine_dimes).to eq(3)
       expect(InsertedCoin.machine_nickels).to eq(3)
@@ -166,14 +172,18 @@ RSpec.describe Order, type: :model do
       expect(order.return_coins_button).to eq(true)
     end
 
-    it 'returns coins when a user presses the return coins button' do
+    it 'returns coins and resets inserted_coin amounts to 0 when a user presses the return coins button' do
       dime_1.evaluate_coin_values(inserted_coins)
       dime_2.evaluate_coin_values(inserted_coins)
       quarter_1.evaluate_coin_values(inserted_coins)
       quarter_2.evaluate_coin_values(inserted_coins)
       nickel.evaluate_coin_values(inserted_coins)
       order.return_coins_button
-      expect(order.user_message).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1, "pennies" => 0})
+      expect(order.coin_return).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+      expect(order.inserted_coin.quarters).to eq(0)
+      expect(order.inserted_coin.dimes).to eq(0)
+      expect(order.inserted_coin.nickels).to eq(0)
+      expect(order.user_message).to eq("INSERT COINS")
     end
 
     it 'returns a coins when the button is pressed even if user has selected an item' do
@@ -185,7 +195,8 @@ RSpec.describe Order, type: :model do
       order.return_coins_button
       candy.select_button
       product = Product.product_selected?
-      expect(order.user_message(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1, "pennies" => 0})
+      expect(order.coin_return(product)).to eq({"quarters" => 2, "dimes" => 2, "nickels" => 1})
+      expect(order.user_message(product)).to eq("INSERT COINS")
       expect(product.quantity).to eq(5)
     end
 
