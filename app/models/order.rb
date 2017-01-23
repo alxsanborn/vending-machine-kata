@@ -29,13 +29,11 @@ class Order < ApplicationRecord
     end
 
     def return_inserted_coins
-      coins = {
+      {
         "quarters" => self.inserted_coin.quarters,
         "dimes" => self.inserted_coin.dimes,
-        "nickels" => self.inserted_coin.nickels,
+        "nickels" => self.inserted_coin.nickels
       }
-      reset_coin_amounts
-      return coins
     end
 
     def reset_coin_amounts
@@ -89,6 +87,10 @@ class Order < ApplicationRecord
         product.decrease_product_quantity
         product.deselect_button
         thank_you
+      when self.return_coins == true
+        reset_coin_amounts
+        self.inserted_coin.value = self.inserted_coin.total
+        self.inserted_coin.value
       else
         self.inserted_coin.value = self.inserted_coin.total
         self.inserted_coin.value

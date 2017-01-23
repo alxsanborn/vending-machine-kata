@@ -21,4 +21,13 @@
     <%}%>
   </div>
 
+  <div class="row">
+      <% if current_order.coin_return == nil %>
+        <p>No return change at this time.</p>
+          <%else%>
+          <p>Returning:</p>
+            <%=current_order.coin_return%>
+        <%end%>
+  </div>
+
 </div>
