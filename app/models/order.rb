@@ -80,7 +80,6 @@ class Order < ApplicationRecord
       case
       when self.return_coins == true
         reset_coin_amounts
-        binding.pry
         self.inserted_coin.value = self.inserted_coin.total
         self.inserted_coin.value
       when self.inserted_coin.total == 0 && enough_change?

@@ -33,5 +33,4 @@ nickel_3 = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625, coin_i
 nickel_4 = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625, coin_image: File.new("app/assets/images/nickel.png"))
 nickel_5 = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625, coin_image: File.new("app/assets/images/nickel.png"))
 nickel_6 = Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625, coin_image: File.new("app/assets/images/nickel.png"))
-
 penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598, coin_image: File.new("app/assets/images/penny.png"))
