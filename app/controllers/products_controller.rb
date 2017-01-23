@@ -11,9 +11,9 @@ class ProductsController < ApplicationController
     @coins = Coin.all
   end
 
-  def show
-  end
-
   def edit
+    product = Product.find(params[:id])
+    product.select_button
+    redirect_to root_path
   end
 end
