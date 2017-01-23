@@ -12,10 +12,10 @@
     <nav class="navbar navbar-light bg-faded">
       <span>
         Vending Machine
-        <%if current_order.user_message.is_a? Numeric%>
-          <%='%.2f' % current_order.user_message%>
+        <%if current_order.user_message(Product.product_selected?).is_a? Numeric%>
+          <%='%.2f' % current_order.user_message(Product.product_selected?)%>
           <%else%>
-          <%=current_order.user_message%>
+          <%=current_order.user_message(Product.product_selected?)%>
           <%end%>
           <%= button_to "Return Coins", edit_order_path(current_order), :class=> "btn btn-primary", :method => :get %>
       </span>
