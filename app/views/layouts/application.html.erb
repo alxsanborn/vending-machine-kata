@@ -12,7 +12,7 @@
     <nav class="navbar navbar-light bg-faded">
       <span>
         Vending Machine
-        <%if current_order.user_message.is_a? Integer%>
+        <%if current_order.user_message.is_a? Numeric%>
           <%='%.2f' % current_order.user_message%>
           <%else%>
           <%=current_order.user_message%>
