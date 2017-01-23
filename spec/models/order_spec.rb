@@ -10,6 +10,7 @@ RSpec.describe Order, type: :model do
   let (:quarter_1) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
   let (:quarter_2) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
   let (:nickel) {Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
+  let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)}
   let(:cola) {Product.create(name: "cola", price: 1.00, quantity: 30)}
   let(:chips) {Product.create(name: "chips", price: 0.50)}
   let(:candy) {Product.create(name: "candy", price: 0.65, quantity: 5)}
@@ -43,8 +44,9 @@ RSpec.describe Order, type: :model do
     it 'rejects pennies' do
         penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
         penny.evaluate_coin_values(inserted_coins)
-        expect(order.user_message).to eq("INSERT COINS")
         expect(order.coin_return).to eq({"pennies"=>1})
+        expect(order.user_message).to eq("INSERT COINS")
+        expect(order.inserted_coin.pennies).to eq(0)
     end
 
     it 'prompts a user to insert exact change only when the machine does not have change' do
@@ -214,6 +216,14 @@ RSpec.describe Order, type: :model do
         expect(order.inserted_coin.quarters).to eq(0)
         expect(order.inserted_coin.dimes).to eq(0)
         expect(order.inserted_coin.nickels).to eq(0)
+      end
+    end
+
+    describe '#reset_pennies' do
+      it 'deletes pennies from penny count when they have been returned' do
+        penny.evaluate_coin_values(inserted_coins)
+        order.reset_pennies
+        expect(order.inserted_coin.pennies).to eq(0)
       end
     end
   end

@@ -37,7 +37,7 @@ class Order < ApplicationRecord
     end
 
     def reset_coin_amounts
-      self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0)
+      self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0, pennies: 0)
     end
 
     def enough_change?
@@ -60,6 +60,10 @@ class Order < ApplicationRecord
       {"pennies" => self.inserted_coin.pennies}
     end
 
+    def reset_pennies
+      self.inserted_coin.update(pennies: 0)
+    end
+
     def coin_return(product=nil)
       case
       when self.return_coins == true && self.inserted_coin.total > 0
@@ -74,9 +78,16 @@ class Order < ApplicationRecord
 
     def user_message(product = nil)
       case
+      when self.return_coins == true
+        reset_coin_amounts
+        binding.pry
+        self.inserted_coin.value = self.inserted_coin.total
+        self.inserted_coin.value
       when self.inserted_coin.total == 0 && enough_change?
+        reset_pennies
         insert_coins
       when self.inserted_coin.total == 0
+        reset_pennies
         exact_change_only
       when product && self.inserted_coin.total >= product.price && product.quantity == 0
         sold_out
@@ -87,11 +98,8 @@ class Order < ApplicationRecord
         product.decrease_product_quantity
         product.deselect_button
         thank_you
-      when self.return_coins == true
-        reset_coin_amounts
-        self.inserted_coin.value = self.inserted_coin.total
-        self.inserted_coin.value
       else
+        reset_pennies
         self.inserted_coin.value = self.inserted_coin.total
         self.inserted_coin.value
        end
