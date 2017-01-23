@@ -26,7 +26,9 @@
         <p>No return change at this time.</p>
           <%else%>
           <p>Returning:</p>
-            <%=current_order.coin_return%>
+            <%current_order.coin_return.each{|coin_name, coin_quantity| %>
+                <%="#{coin_name}: #{coin_quantity}"%>
+              <%}%>
         <%end%>
   </div>
 
