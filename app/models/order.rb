@@ -22,10 +22,12 @@ class Order < ApplicationRecord
 
     def user_message(product = nil)
       case
+      when self.return_coins == true && enough_change?
+        reset_coin_amounts
+        insert_coins
       when self.return_coins == true
         reset_coin_amounts
-        self.inserted_coin.value = self.inserted_coin.total
-        self.inserted_coin.value
+        exact_change_only
       when self.inserted_coin.total == 0 && enough_change?
         reset_pennies
         insert_coins
