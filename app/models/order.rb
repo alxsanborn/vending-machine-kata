@@ -35,6 +35,7 @@ class Order < ApplicationRecord
         reset_pennies
         exact_change_only
       when product && self.inserted_coin.total >= product.price && product.quantity == 0
+        product.deselect_button
         sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
         add_quarters_to_machine
