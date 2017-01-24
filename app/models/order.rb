@@ -38,6 +38,7 @@ class Order < ApplicationRecord
         product.deselect_button
         sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
+        reset_visible_coins
         add_quarters_to_machine
         add_dimes_to_machine
         add_nickels_to_machine
@@ -52,6 +53,10 @@ class Order < ApplicationRecord
      end
 
      private
+     def reset_visible_coins
+      Coin.all_valid_coins = []
+     end
+
      def insert_coins
        "INSERT COINS"
      end
