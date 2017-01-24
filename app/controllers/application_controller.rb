@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
  def current_order
    Order.find(start_order["id"])
  end
+
+ def delete_order
+   session[:order_id] = nil
+ end
 end

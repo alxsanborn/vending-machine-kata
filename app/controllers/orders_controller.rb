@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   def new
+    delete_order
+    redirect_to root_path
   end
 
   def create
