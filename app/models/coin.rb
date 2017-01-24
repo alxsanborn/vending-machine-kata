@@ -28,19 +28,32 @@ class Coin < ApplicationRecord
   has_attached_file :coin_image, styles: { small: "64x64", med: "100x100", large: "200x200" }
   validates_attachment_content_type :coin_image, content_type: /\Aimage\/.*\z/
 
+  @@all_valid_coins = []
+
+  def self.all_valid_coins=(all_valid_coins)
+    @@all_valid_coins = all_valid_coins
+  end
+
+  def self.all_valid_coins
+    @@all_valid_coins
+  end
+
   def dime(user_coins)
     user_coins.dimes += 1
     user_coins.save
+    @@all_valid_coins.push(self)
   end
 
   def nickel(user_coins)
     user_coins.nickels += 1
     user_coins.save
+    @@all_valid_coins.push(self)
   end
 
   def quarter(user_coins)
     user_coins.quarters += 1
     user_coins.save
+    @@all_valid_coins.push(self)
   end
 
   def penny(user_coins)

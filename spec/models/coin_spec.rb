@@ -47,6 +47,8 @@ RSpec.describe Coin, type: :model do
     it 'can add nickels' do
       nickel.nickel(valid_coins)
       expect(valid_coins.nickels).to eq(1)
+      expect(Coin.all_valid_coins).to include(nickel)
+      binding.pry
     end
   end
 
@@ -54,6 +56,7 @@ RSpec.describe Coin, type: :model do
     it 'can add dimes' do
       dime_1.dime(valid_coins)
       expect(valid_coins.dimes).to eq(1)
+      expect(Coin.all_valid_coins).to include(dime_1)
     end
   end
 
@@ -61,6 +64,7 @@ RSpec.describe Coin, type: :model do
     it 'can add quarters' do
       quarter_1.quarter(valid_coins)
       expect(valid_coins.quarters).to eq(1)
+      expect(Coin.all_valid_coins).to include(quarter_1)
     end
   end
 
