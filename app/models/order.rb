@@ -8,62 +8,6 @@ class Order < ApplicationRecord
   extend Actions::ProductClass
   include Actions::ChangeReturn
 
-    def insert_coins
-      "INSERT COINS"
-    end
-
-    def thank_you
-      "THANK YOU"
-    end
-
-    def sold_out
-      "SOLD OUT"
-    end
-
-    def exact_change_only
-      "EXACT CHANGE ONLY"
-    end
-
-    def return_coins_button
-      self.update(return_coins: true)
-    end
-
-    def return_inserted_coins
-      {
-        "quarters" => self.inserted_coin.quarters,
-        "dimes" => self.inserted_coin.dimes,
-        "nickels" => self.inserted_coin.nickels
-      }
-    end
-
-    def reset_coin_amounts
-      self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0, pennies: 0)
-    end
-
-    def enough_change?
-      true if InsertedCoin.machine_quarters >= 1 && InsertedCoin.machine_dimes >=1 && InsertedCoin.machine_nickels >= 1
-    end
-
-    def add_quarters_to_machine
-      InsertedCoin.machine_quarters += self.inserted_coin.quarters
-    end
-
-    def add_dimes_to_machine
-      InsertedCoin.machine_dimes += self.inserted_coin.dimes
-    end
-
-    def add_nickels_to_machine
-      InsertedCoin.machine_nickels += self.inserted_coin.nickels
-    end
-
-    def return_pennies
-      {"pennies" => self.inserted_coin.pennies}
-    end
-
-    def reset_pennies
-      self.inserted_coin.update(pennies: 0)
-    end
-
     def coin_return(product=nil)
       case
       when self.return_coins == true && self.inserted_coin.total > 0
@@ -102,5 +46,62 @@ class Order < ApplicationRecord
         self.inserted_coin.value = self.inserted_coin.total
         self.inserted_coin.value
        end
+     end
+
+     private
+     def insert_coins
+       "INSERT COINS"
+     end
+
+     def thank_you
+       "THANK YOU"
+     end
+
+     def sold_out
+       "SOLD OUT"
+     end
+
+     def exact_change_only
+       "EXACT CHANGE ONLY"
+     end
+
+     def return_coins_button
+       self.update(return_coins: true)
+     end
+
+     def return_inserted_coins
+       {
+         "quarters" => self.inserted_coin.quarters,
+         "dimes" => self.inserted_coin.dimes,
+         "nickels" => self.inserted_coin.nickels
+       }
+     end
+
+     def reset_coin_amounts
+       self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0, pennies: 0)
+     end
+
+     def enough_change?
+       true if InsertedCoin.machine_quarters >= 1 && InsertedCoin.machine_dimes >=1 && InsertedCoin.machine_nickels >= 1
+     end
+
+     def add_quarters_to_machine
+       InsertedCoin.machine_quarters += self.inserted_coin.quarters
+     end
+
+     def add_dimes_to_machine
+       InsertedCoin.machine_dimes += self.inserted_coin.dimes
+     end
+
+     def add_nickels_to_machine
+       InsertedCoin.machine_nickels += self.inserted_coin.nickels
+     end
+
+     def return_pennies
+       {"pennies" => self.inserted_coin.pennies}
+     end
+
+     def reset_pennies
+       self.inserted_coin.update(pennies: 0)
      end
    end
