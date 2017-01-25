@@ -27,12 +27,12 @@ class Order < ApplicationRecord
         insert_coins
       when self.return_coins == true
         exact_change_only
+      when product && product.quantity == 0
+        sold_out
       when self.inserted_coin.total == 0 && enough_change?
         insert_coins
       when self.inserted_coin.total == 0
         exact_change_only
-      when product && self.inserted_coin.total >= product.price && product.quantity == 0
-        sold_out
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
         reset_visible_coins
         add_quarters_to_machine
@@ -81,7 +81,7 @@ class Order < ApplicationRecord
      end
 
      def return_inserted_coins
-         "Quarters - #{self.inserted_coin.quarters}; Dimes - #{self.inserted_coin.dimes}; Nickels - #{inserted_coin.nickels}"
+       "Quarters - #{self.inserted_coin.quarters}; Dimes - #{self.inserted_coin.dimes}; Nickels - #{inserted_coin.nickels}"
      end
 
      def enough_change?

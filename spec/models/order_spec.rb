@@ -105,9 +105,6 @@ RSpec.describe Order, type: :model do
     end
 
     it 'tells a user when a product is sold out' do
-      quarter_1.evaluate_coin_values(inserted_coins)
-      quarter_2.evaluate_coin_values(inserted_coins)
-      dime_1.evaluate_coin_values(inserted_coins)
       chips.select_button
       product = Product.product_selected?
       expect(order.user_message(product)).to eq("SOLD OUT")
