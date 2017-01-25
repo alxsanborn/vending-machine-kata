@@ -48,7 +48,6 @@ RSpec.describe Coin, type: :model do
       nickel.nickel(valid_coins)
       expect(valid_coins.nickels).to eq(1)
       expect(Coin.all_valid_coins).to include(nickel)
-      binding.pry
     end
   end
 
