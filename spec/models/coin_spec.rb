@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Coin, type: :model do
 
   let (:valid_coins) {InsertedCoin.new}
-  let (:dime_1) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_1) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053, coin_image: File.new("app/assets/images/dime.png"))}
   let (:dime_2) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
   let (:dime_3) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
   let (:quarter_1) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
@@ -29,6 +29,10 @@ RSpec.describe Coin, type: :model do
     it 'requires thickness attribute' do
       no_thickness = Coin.new(weight: 1.2, diameter: 3.4)
       expect(no_thickness).to_not be_valid
+    end
+
+    it 'can have an image' do
+      allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
     end
   end
 
