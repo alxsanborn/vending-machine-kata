@@ -2,7 +2,7 @@
   <div class="row">
     <% @products.each {|product| %>
       <div class="col-sm-12 col-md-4">
-        <div class="card" style="width: 7rem;">
+        <div class="text-center card" style="width: 7rem;">
           <%=link_to image_tag(product.product_image.url(:med)), edit_product_path(product)%>
           <div class="card-block">
             <p class="card-text"><%= product.name %></p>
