@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170114172343) do
 
   create_table "orders", force: :cascade do |t|
     t.boolean  "return_coins", default: false
+    t.boolean  "purchased",    default: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end

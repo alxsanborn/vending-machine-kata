@@ -86,6 +86,7 @@ RSpec.describe Order, type: :model do
     end
 
     it 'when item is successfully purchased, dispenses change and thanks the user' do
+      expect(order.purchased).to eq(false)
       quarter_1.evaluate_coin_values(inserted_coins)
       quarter_2.evaluate_coin_values(inserted_coins)
       dime_1.evaluate_coin_values(inserted_coins)
@@ -95,6 +96,7 @@ RSpec.describe Order, type: :model do
       product = Product.product_selected?
       expect(order.coin_return(product)).to eq({"quarters" => 0, "nickels" => 0, "dimes" => 1})
       expect(order.user_message(product)).to eq("THANK YOU")
+      expect(order.purchased).to eq(true)
       expect(InsertedCoin.machine_quarters).to eq(4)
       expect(InsertedCoin.machine_dimes).to eq(3)
       expect(InsertedCoin.machine_nickels).to eq(3)

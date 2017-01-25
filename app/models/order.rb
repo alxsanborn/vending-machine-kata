@@ -44,6 +44,8 @@ class Order < ApplicationRecord
         add_nickels_to_machine
         product.decrease_product_quantity
         product.deselect_button
+        purchase
+        binding.pry
         thank_you
       else
         reset_pennies
@@ -55,6 +57,10 @@ class Order < ApplicationRecord
      private
      def reset_visible_coins
       Coin.all_valid_coins = []
+     end
+
+     def purchase
+      self.update(purchased: true)
      end
 
      def insert_coins
