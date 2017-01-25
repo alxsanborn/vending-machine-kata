@@ -73,11 +73,7 @@ module Actions
 
         nickels = make_change_nickels(remainder)
 
-        return {
-          "quarters" => quarters[0],
-          "dimes" => dimes[0],
-          "nickels" => nickels
-        }
+        "Quarters - #{quarters[0]}; Dimes - #{dimes[0]}; Nickels - #{nickels}"
       end
 
       def remainder?(product)

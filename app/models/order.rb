@@ -52,7 +52,6 @@ class Order < ApplicationRecord
        self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0, pennies: 0)
      end
 
-     private
      def reset_visible_coins
       Coin.all_valid_coins = []
      end
