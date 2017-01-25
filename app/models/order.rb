@@ -45,7 +45,6 @@ class Order < ApplicationRecord
         product.decrease_product_quantity
         product.deselect_button
         purchase
-        binding.pry
         thank_you
       else
         reset_pennies
