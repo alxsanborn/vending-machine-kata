@@ -15,4 +15,7 @@ Thank you for taking the time to consider me as a candidate. Please find the "ne
 * To view locally...
   1. Initialize, create, and seed database by running 'rails db:create,' then 'rails db:migrate,' then 'rails db:seed' in the terminal.
   2. Run 'rails s' in the terminal to launch the server.
-  3. Type in 'localhost:3000' in your browser's url.  
+  3. Type in 'localhost:3000' in your browser's url.
+  4. I seeded it so there are 100 colas, 0 chips, and 5 candies.  
+
+  ![Alt text](app/assets/images/home_page.png?raw=true "Optional Title")
