@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
-  let (:cola) {Product.create(name: "cola", price: 1.00, product_image: File.new("app/assets/images/cola.jpeg"))}
+  let (:cola) {Product.create(name: "cola", price: 1.00)}
 
   context 'validations' do
     it 'can create a new product with name and price' do
@@ -17,10 +17,6 @@ RSpec.describe Product, type: :model do
     it 'cannot be created without price' do
       free_cheetos = Product.create(name: 'cheetos')
       expect(free_cheetos).to_not be_valid
-    end
-
-    it 'can have an image' do
-      allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
     end
   end
 
