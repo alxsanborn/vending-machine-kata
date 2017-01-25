@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hello Pillar Technology!
 
-Things you may want to cover:
+Thank you for taking the time to consider me as a candidate. Please find the "need to know" information below:
 
-* Ruby version
+* Written in Ruby 2.3.1p112 with Rails 5.0.1 framework
 
-* System dependencies
+* RSpec tests
 
-* Configuration
+* To install all dependencies, run 'bundle install' in the terminal. If you do not have Bundler installed, run 'gem install bundler' first.
 
-* Database creation
+* To run unit tests, run 'rspec' in the terminal.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* To view locally...
+  -1. Initialize, create, and seed database by running 'rails db:create,' then 'rails db:migrate,' then 'rails db:seed' in the terminal.
+  -2. Run 'rails s' in the terminal to launch the server.
+  -3. Type in 'localhost:3000' in your browser's url.  
