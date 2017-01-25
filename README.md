@@ -13,6 +13,6 @@ Thank you for taking the time to consider me as a candidate. Please find the "ne
 * To run unit tests, run 'rspec' in the terminal.
 
 * To view locally...
-  -1. Initialize, create, and seed database by running 'rails db:create,' then 'rails db:migrate,' then 'rails db:seed' in the terminal.
-  -2. Run 'rails s' in the terminal to launch the server.
-  -3. Type in 'localhost:3000' in your browser's url.  
+  1. Initialize, create, and seed database by running 'rails db:create,' then 'rails db:migrate,' then 'rails db:seed' in the terminal.
+  2. Run 'rails s' in the terminal to launch the server.
+  3. Type in 'localhost:3000' in your browser's url.  
