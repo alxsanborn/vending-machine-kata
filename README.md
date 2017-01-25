@@ -18,4 +18,4 @@ Thank you for taking the time to consider me as a candidate. Please find the "ne
   3. Type in 'localhost:3000' in your browser's url.
   4. I seeded it so there are 100 colas, 0 chips, and 5 candies.  
 
-  ![Homepage Screenshot](/app/assets/images/home_page.png?raw=true "Optional Title")
+  ![Homepage Screenshot](https://www.dropbox.com/s/gnnwyyf1tksfdmq/home_page.png?dl=0)
