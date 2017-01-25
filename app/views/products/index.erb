@@ -26,14 +26,34 @@
   </div>
 
   <div class="row">
-      <% if current_order.coin_return == nil %>
-        <p>No return change at this time.</p>
-          <%else%>
-          <p>Returning: </p>
-            <%current_order.coin_return.each{|coin_name, coin_quantity| %>
-                <%="#{coin_name} - #{coin_quantity}"%>
-              <%}%>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td>
+            <%=current_order.user_message(Product.product_selected?)%>
+          </td>
+          <td>
+            <%= button_to "Return Coins", edit_order_path(current_order), :class=> "btn btn-primary", :method => :get %>
+          </td>
+
+        </tr>
+        <% if current_order.coin_return == nil %>
+        <tr>
+          <td>No return change at this time.</td>
+        </tr>
+        <%else%>
+        <tr>
+          <td>Returning:</td>
+        </tr>
+        <tr>
+          <%current_order.coin_return.each{|coin_name, coin_quantity| %>
+              <td><%="#{coin_name}"%></td>
+              <td><%="#{coin_quantity}"%></td>
+            <%}%>
+        </tr>
         <%end%>
+      </tbody>
+    </table>
   </div>
 
 </div>
