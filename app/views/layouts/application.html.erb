@@ -22,5 +22,12 @@
         }, 3000);
       </script>
     <%end%>
+    <%if Product.product_selected? && Product.product_selected?.quantity == 0 %>
+     <script type="text/javascript">
+      window.setTimeout(function(){
+          window.location.href = 'http://localhost:3000/products/:id/edit';
+        }, 3000);
+      </script>
+    <%end%>
   </body>
 </html>
