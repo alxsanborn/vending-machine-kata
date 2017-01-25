@@ -5,13 +5,7 @@
         <table class="table table-hover">
           <tbody>
             <tr>
-              <td>
-                <%=current_order.user_message(Product.product_selected?)%>
-              </td>
-              <td>
-                <%= button_to "Return Coins", edit_order_path(current_order), :class=> "btn btn-primary", :method => :get %>
-              </td>
-
+              <td><%=current_order.user_message(Product.product_selected?)%></td>
             </tr>
             <% if current_order.coin_return == nil %>
             <tr>
@@ -30,6 +24,7 @@
             <%end%>
           </tbody>
         </table>
+        <%= button_to "Return Coins", edit_order_path(current_order), :class=> "btn btn-primary", :method => :get %>
       </div>
     </div>
   </div>
