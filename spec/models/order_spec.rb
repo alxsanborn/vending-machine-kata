@@ -184,6 +184,7 @@ RSpec.describe Order, type: :model do
       nickel.evaluate_coin_values(inserted_coins)
       order.return_coins_button
       expect(order.coin_return).to eq("Quarters - 2; Dimes - 2; Nickels - 1")
+      order.reset_coin_amounts #gets implemented in the controller
       expect(order.inserted_coin.quarters).to eq(0)
       expect(order.inserted_coin.dimes).to eq(0)
       expect(order.inserted_coin.nickels).to eq(0)
@@ -215,9 +216,9 @@ RSpec.describe Order, type: :model do
         quarter_1.evaluate_coin_values(inserted_coins)
         nickel.evaluate_coin_values(inserted_coins)
         order.reset_coin_amounts
-        expect(order.inserted_coin.quarters).to eq(0)
-        expect(order.inserted_coin.dimes).to eq(0)
-        expect(order.inserted_coin.nickels).to eq(0)
+        expect(inserted_coins.quarters).to eq(0)
+        expect(inserted_coins.dimes).to eq(0)
+        expect(inserted_coins.nickels).to eq(0)
       end
     end
 
