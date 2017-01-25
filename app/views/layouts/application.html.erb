@@ -16,17 +16,13 @@
     </nav>
     <%= yield %>
     <%if current_order.purchased == true %>
-     <script type="text/javascript">
-      window.setTimeout(function(){
-          window.location.href = "http://localhost:3000/orders/new";
-        }, 3000);
+      <script type="text/javascript">
+        completedPurchase()
       </script>
     <%end%>
     <%if Product.product_selected? && Product.product_selected?.quantity == 0 %>
-     <script type="text/javascript">
-      window.setTimeout(function(){
-          window.location.href = 'http://localhost:3000/products/:id/edit';
-        }, 3000);
+      <script type="text/javascript">
+        soldOut()
       </script>
     <%end%>
   </body>
