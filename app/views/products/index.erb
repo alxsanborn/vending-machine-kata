@@ -7,21 +7,9 @@
             <tr>
               <td><%=current_order.user_message(Product.product_selected?)%></td>
             </tr>
-            <% if current_order.coin_return == nil %>
             <tr>
-              <td>No return change at this time.</td>
+              <td><%=current_order.coin_return(Product.product_selected?)%></td>
             </tr>
-            <%else%>
-            <tr>
-              <td>Returning:</td>
-            </tr>
-            <tr>
-              <%current_order.coin_return.each{|coin_name, coin_quantity| %>
-                  <td><%="#{coin_name}"%></td>
-                  <td><%="#{coin_quantity}"%></td>
-                <%}%>
-            </tr>
-            <%end%>
           </tbody>
         </table>
         <%= button_to "Return Coins", edit_order_path(current_order), :class=> "btn btn-primary", :method => :get %>

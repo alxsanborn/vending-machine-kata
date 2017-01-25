@@ -17,22 +17,19 @@ class Order < ApplicationRecord
         return_pennies
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
         make_change(remainder?(product)) if remainder?(product) > 0
+      else "No return change at this time."
       end
     end
 
     def user_message(product = nil)
       case
       when self.return_coins == true && enough_change?
-        reset_coin_amounts
         insert_coins
       when self.return_coins == true
-        reset_coin_amounts
         exact_change_only
       when self.inserted_coin.total == 0 && enough_change?
-        reset_pennies
         insert_coins
       when self.inserted_coin.total == 0
-        reset_pennies
         exact_change_only
       when product && self.inserted_coin.total >= product.price && product.quantity == 0
         sold_out
@@ -46,10 +43,13 @@ class Order < ApplicationRecord
         purchase
         thank_you
       else
-        reset_pennies
         self.inserted_coin.value = self.inserted_coin.total
         '%.2f' % self.inserted_coin.value
        end
+     end
+
+     def reset_coin_amounts
+       self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0, pennies: 0)
      end
 
      private
@@ -82,15 +82,7 @@ class Order < ApplicationRecord
      end
 
      def return_inserted_coins
-       {
-         "quarters" => self.inserted_coin.quarters,
-         "dimes" => self.inserted_coin.dimes,
-         "nickels" => self.inserted_coin.nickels
-       }
-     end
-
-     def reset_coin_amounts
-       self.inserted_coin.update(quarters: 0, dimes: 0, nickels: 0, pennies: 0)
+         "Quarters - #{self.inserted_coin.quarters}; Dimes - #{self.inserted_coin.dimes}; Nickels - #{inserted_coin.nickels}"
      end
 
      def enough_change?
@@ -110,7 +102,8 @@ class Order < ApplicationRecord
      end
 
      def return_pennies
-       {"pennies" => self.inserted_coin.pennies}
+       reset_pennies
+       "Pennies - 1"
      end
 
      def reset_pennies
