@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   extend Actions::ProductClass
   include Actions::ChangeReturn
 
-    def coin_return(product=nil)
+    def coin_return(product)
       case
       when self.return_coins == true && self.inserted_coin.total > 0
         product.deselect_button if product
@@ -21,7 +21,7 @@ class Order < ApplicationRecord
       end
     end
 
-    def user_message(product=nil)
+    def user_message(product)
       case
       when self.return_coins == true && enough_change?
         insert_coins
