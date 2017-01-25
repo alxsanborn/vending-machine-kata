@@ -39,7 +39,6 @@ class Order < ApplicationRecord
         add_dimes_to_machine
         add_nickels_to_machine
         product.decrease_product_quantity
-        product.deselect_button
         purchase
         thank_you
       else

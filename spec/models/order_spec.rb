@@ -100,7 +100,6 @@ RSpec.describe Order, type: :model do
       expect(InsertedCoin.machine_dimes).to eq(3)
       expect(InsertedCoin.machine_nickels).to eq(3)
       expect(product.quantity).to eq(4)
-      expect(product.selected).to eq(false)
     end
 
     it 'tells a user when a product is sold out' do
