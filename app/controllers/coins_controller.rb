@@ -1,13 +1,4 @@
 class CoinsController < ApplicationController
-  def new
-  end
-
-  def create
-  end
-
-  def show
-  end
-
   def edit
     if current_order.return_coins == true
       current_order.update(return_coins: false)

@@ -17,11 +17,11 @@ class Order < ApplicationRecord
         return_pennies
       when product && self.inserted_coin.total >= product.price && product.quantity > 0
         make_change(remainder?(product)) if remainder?(product) > 0
-      else "No return change at this time."
+      else no_return_change
       end
     end
 
-    def user_message(product = nil)
+    def user_message(product=nil)
       case
       when self.return_coins == true && enough_change?
         insert_coins
@@ -58,6 +58,10 @@ class Order < ApplicationRecord
 
      def purchase
       self.update(purchased: true)
+     end
+
+     def no_return_change
+       "No return change at this time."
      end
 
      def insert_coins
