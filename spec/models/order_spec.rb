@@ -1,18 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  let (:order) {Order.create}
-  let (:inserted_coins) {InsertedCoin.create}
-  let (:dime_1) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:dime_2) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:dime_3) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:quarter_1) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
-  let (:quarter_2) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
-  let (:nickel) {Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
-  let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)}
-  let(:cola) {Product.create(name: "cola", price: 1.00, quantity: 30)}
-  let(:chips) {Product.create(name: "chips", price: 0.50)}
-  let(:candy) {Product.create(name: "candy", price: 0.65, quantity: 5)}
+  let (:order) {Order.new}
+  let (:inserted_coins) {InsertedCoin.new}
+  let (:dime_1) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_2) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_3) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:quarter_1) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
+  let (:quarter_2) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
+  let (:nickel) {Coin.new(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
+  let (:penny) {Coin.new(diameter: 0.751, weight: 2.500, thickness: 0.0598)}
+  let(:cola) {Product.new(name: "cola", price: 1.00, quantity: 30)}
+  let(:chips) {Product.new(name: "chips", price: 0.50)}
+  let(:candy) {Product.new(name: "candy", price: 0.65, quantity: 5)}
 
   before do
     order.inserted_coin = inserted_coins
@@ -25,7 +25,7 @@ RSpec.describe Order, type: :model do
   end
 
   context 'validations' do
-    it 'creates a new order' do
+    it 'news a new order' do
       expect(order).to be_valid
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Order, type: :model do
     end
 
     it 'rejects pennies' do
-        penny = Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)
+        penny = Coin.new(diameter: 0.751, weight: 2.500, thickness: 0.0598)
         penny.evaluate_coin_values(inserted_coins)
         expect(order.coin_return).to eq("Pennies - 1")
         expect(order.user_message).to eq("INSERT COINS")

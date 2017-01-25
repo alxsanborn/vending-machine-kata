@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
-  let (:cola) {Product.create(name: "cola", price: 1.00)}
+  let (:cola) {Product.new(name: "cola", price: 1.00)}
 
   context 'validations' do
     it 'can create a new product with name and price' do
@@ -10,12 +10,12 @@ RSpec.describe Product, type: :model do
     end
 
     it 'cannot be created without name' do
-      product_1 = Product.create(price: 0.45)
+      product_1 = Product.new(price: 0.45)
       expect(product_1).to_not be_valid
     end
 
     it 'cannot be created without price' do
-      free_cheetos = Product.create(name: 'cheetos')
+      free_cheetos = Product.new(name: 'cheetos')
       expect(free_cheetos).to_not be_valid
     end
   end

@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Coin, type: :model do
 
-  let (:valid_coins) {InsertedCoin.create}
-  let (:dime_1) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:dime_2) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:dime_3) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:quarter_1) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
-  let (:quarter_2) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
-  let (:nickel) {Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
-  let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 0.0598)}
+  let (:valid_coins) {InsertedCoin.new}
+  let (:dime_1) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_2) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_3) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:quarter_1) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
+  let (:quarter_2) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
+  let (:nickel) {Coin.new(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
+  let (:penny) {Coin.new(diameter: 0.751, weight: 2.500, thickness: 0.0598)}
 
   context 'validations' do
     it 'can create a new coin' do
@@ -17,17 +17,17 @@ RSpec.describe Coin, type: :model do
     end
 
     it 'requires weight attribute' do
-      no_weight = Coin.create(diameter: 3.2, thickness: 0.9)
+      no_weight = Coin.new(diameter: 3.2, thickness: 0.9)
       expect(no_weight).to_not be_valid
     end
 
     it 'requires diameter attribute' do
-      no_diameter = Coin.create(weight: 3.3, thickness: 4.4)
+      no_diameter = Coin.new(weight: 3.3, thickness: 4.4)
       expect(no_diameter).to_not be_valid
     end
 
     it 'requires thickness attribute' do
-      no_thickness = Coin.create(weight: 1.2, diameter: 3.4)
+      no_thickness = Coin.new(weight: 1.2, diameter: 3.4)
       expect(no_thickness).to_not be_valid
     end
   end
@@ -85,7 +85,7 @@ RSpec.describe Coin, type: :model do
     end
 
     it 'rejects objects with valid diameter and thickness but invalid weight' do
-     invalid_dime = Coin.create(weight: 2.500, diameter: 0.705, thickness: 0.053)
+     invalid_dime = Coin.new(weight: 2.500, diameter: 0.705, thickness: 0.053)
      invalid_dime.evaluate_coin_values(valid_coins)
      expect(valid_coins.quarters).to eq(0)
      expect(valid_coins.nickels).to eq(0)
@@ -94,7 +94,7 @@ RSpec.describe Coin, type: :model do
     end
 
     it 'rejects objects with valid weight and thickness but invalid diameter' do
-     invalid_nickel = Coin.create(weight: 5.000, diameter: 3.000, thickness: 1.950)
+     invalid_nickel = Coin.new(weight: 5.000, diameter: 3.000, thickness: 1.950)
      invalid_nickel.evaluate_coin_values(valid_coins)
      expect(valid_coins.quarters).to eq(0)
      expect(valid_coins.nickels).to eq(0)
@@ -102,7 +102,7 @@ RSpec.describe Coin, type: :model do
     end
 
     it 'rejects objects with valid weight and diameter but invalid thickness' do
-     invalid_quarter = Coin.create(weight: 5.561, diameter: 0.955, thickness: 0.066)
+     invalid_quarter = Coin.new(weight: 5.561, diameter: 0.955, thickness: 0.066)
      invalid_quarter.evaluate_coin_values(valid_coins)
      expect(valid_coins.quarters).to eq(0)
      expect(valid_coins.nickels).to eq(0)
