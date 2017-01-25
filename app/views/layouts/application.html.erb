@@ -17,11 +17,13 @@
     <%= yield %>
     <%if current_order.purchased == true %>
       <script type="text/javascript">
-        completedPurchase()
+        //Redirects and starts a new order if user has completed a successful purchase
+        completedPurchase() //I'm not sure whether scripting in the DOM is the best way to do this type of redirect. One problem was that Rails doesn't allow for multiple redirects in the controllers. If I had done a CLI, I would have just created an 'if user has made successful purchase, start new instance of Order after 3 seconds' statement, but multiple returns don't transfer from Ruby models to the Rails framework.
       </script>
     <%end%>
     <%if Product.product_selected? && Product.product_selected?.quantity == 0 %>
       <script type="text/javascript">
+        //Redirects to root_path to display inserted coin subtotal after deselecting sold out product
         soldOut()
       </script>
     <%end%>
