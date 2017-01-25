@@ -49,7 +49,7 @@ class Order < ApplicationRecord
       else
         reset_pennies
         self.inserted_coin.value = self.inserted_coin.total
-        self.inserted_coin.value
+        '%.2f' % self.inserted_coin.value
        end
      end
 
