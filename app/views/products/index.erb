@@ -27,6 +27,7 @@
 
 <div class="container">
   <div class="row">
+    <% if @products.all? {|product| product.selected == false } %>
     <% @products.each {|product| %>
       <div class="col-sm-12 col-md-4">
         <div class="text-center card" style="width: 7rem;">
@@ -38,6 +39,17 @@
         </div>
      </div>
     <%}%>
+    <%elsif Product.product_selected?%>
+      <div class="col-sm-12 col-md-4">
+        <div class="text-center card" style="width: 7rem;">
+          <%=link_to image_tag(Product.product_selected?.product_image.url(:med)), edit_product_path(Product.product_selected?)%>
+          <div class="card-block">
+            <p class="card-text"><%= Product.product_selected?.name %></p>
+            <p class="card-text">$<%= '%.2f' % Product.product_selected?.price %></p>
+          </div>
+        </div>
+     </div>
+    <%end%>
   </div>
 
   <div class="row">
