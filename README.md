@@ -1,8 +1,6 @@
 # README
 
-Hello Pillar Technology!
-
-Thank you for taking the time to consider me as a candidate. Please find the "need to know" information below:
+Please find the "need to know" information below:
 
 * Written in Ruby 2.3.1p112 with Rails 5.0.1 framework
 
