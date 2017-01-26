@@ -22,35 +22,26 @@ RSpec.describe InsertedCoin, type: :model do
     end
 
     it 'returns the value of coins when two different coins have been added' do
-      dime_1.evaluate_coin_values(inserted_coins)
-      quarter_1.evaluate_coin_values(inserted_coins)
+      coins = [dime_1, quarter_2]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       expect(inserted_coins.total).to eq(0.35)
     end
 
     it 'returns the value of coins when three different coins have been added' do
-      dime_1.evaluate_coin_values(inserted_coins)
-      quarter_1.evaluate_coin_values(inserted_coins)
-      nickel.evaluate_coin_values(inserted_coins)
+      coins = [dime_1, quarter_1, nickel]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       expect(inserted_coins.total).to eq(0.40)
     end
 
     it 'returns the value of coins when multiple coins of the same kind have been added' do
-      dime_1.evaluate_coin_values(inserted_coins)
-      dime_2.evaluate_coin_values(inserted_coins)
-      quarter_1.evaluate_coin_values(inserted_coins)
-      quarter_2.evaluate_coin_values(inserted_coins)
-      nickel.evaluate_coin_values(inserted_coins)
+      coins = [dime_1, dime_2, quarter_1, quarter_2, nickel]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       expect(inserted_coins.total).to eq(0.75)
     end
 
     it 'does not add pennies to valid coin total' do
-      dime_1.evaluate_coin_values(inserted_coins)
-      dime_2.evaluate_coin_values(inserted_coins)
-      dime_3.evaluate_coin_values(inserted_coins)
-      quarter_1.evaluate_coin_values(inserted_coins)
-      quarter_2.evaluate_coin_values(inserted_coins)
-      nickel.evaluate_coin_values(inserted_coins)
-      penny.evaluate_coin_values(inserted_coins)
+      coins = [dime_1, dime_2, dime_3, quarter_1, quarter_2, nickel, penny]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       expect(inserted_coins.total).to eq(0.85)
     end
   end

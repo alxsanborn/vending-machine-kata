@@ -43,7 +43,6 @@ RSpec.describe Order, type: :model do
     end
 
     it 'rejects pennies' do
-        penny = Coin.new(diameter: 0.751, weight: 2.500, thickness: 0.0598)
         penny.evaluate_coin_values(inserted_coins)
         expect(order.user_message(@product)).to eq("INSERT COINS")
         expect(order.coin_return(@product)).to eq("Pennies - 1")
@@ -85,12 +84,9 @@ RSpec.describe Order, type: :model do
     end
 
     it 'when item is successfully purchased, dispenses change and thanks the user' do
+      coins = [quarter_1, quarter_2, dime_1, dime_2, nickel]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       expect(order.purchased).to eq(false)
-      quarter_1.evaluate_coin_values(inserted_coins)
-      quarter_2.evaluate_coin_values(inserted_coins)
-      dime_1.evaluate_coin_values(inserted_coins)
-      dime_2.evaluate_coin_values(inserted_coins)
-      nickel.evaluate_coin_values(inserted_coins)
       candy.select_button
       expect(order.coin_return(candy)).to eq("Quarters - 0; Dimes - 1; Nickels - 0")
       expect(order.user_message(candy)).to eq("THANK YOU")
@@ -170,11 +166,8 @@ RSpec.describe Order, type: :model do
     end
 
     it 'returns coins and resets inserted_coin amounts to 0 when a user presses the return coins button' do
-      dime_1.evaluate_coin_values(inserted_coins)
-      dime_2.evaluate_coin_values(inserted_coins)
-      quarter_1.evaluate_coin_values(inserted_coins)
-      quarter_2.evaluate_coin_values(inserted_coins)
-      nickel.evaluate_coin_values(inserted_coins)
+      coins = [dime_1, dime_2, quarter_1, quarter_2, nickel]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       order.return_coins_button
       expect(order.coin_return(@product)).to eq("Quarters - 2; Dimes - 2; Nickels - 1")
       order.reset_coin_amounts #gets implemented in the controller
@@ -185,11 +178,8 @@ RSpec.describe Order, type: :model do
     end
 
     it 'returns a coins when the button is pressed even if user has selected an item' do
-      dime_1.evaluate_coin_values(inserted_coins)
-      dime_2.evaluate_coin_values(inserted_coins)
-      quarter_1.evaluate_coin_values(inserted_coins)
-      quarter_2.evaluate_coin_values(inserted_coins)
-      nickel.evaluate_coin_values(inserted_coins)
+      coins = [dime_1, dime_2, quarter_1, quarter_2, nickel]
+      coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
       order.return_coins_button
       candy.select_button
       expect(order.coin_return(candy)).to eq("Quarters - 2; Dimes - 2; Nickels - 1")
@@ -204,9 +194,8 @@ RSpec.describe Order, type: :model do
 
     describe '#reset_coin_amounts' do
       it 'resets inserted_coin amounts to 0 when return coins button has been pressed' do
-        dime_1.evaluate_coin_values(inserted_coins)
-        quarter_1.evaluate_coin_values(inserted_coins)
-        nickel.evaluate_coin_values(inserted_coins)
+        coins = [dime_1, quarter_1, nickel]
+        coins.each{|coin| coin.evaluate_coin_values(inserted_coins)}
         order.reset_coin_amounts
         expect(inserted_coins.quarters).to eq(0)
         expect(inserted_coins.dimes).to eq(0)
