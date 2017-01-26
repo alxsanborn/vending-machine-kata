@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe InsertedCoin, type: :model do
 
   let (:inserted_coins) {InsertedCoin.create}
-  let (:dime_1) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:dime_2) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:dime_3) {Coin.create(diameter: 0.705, weight: 2.269, thickness: 0.053)}
-  let (:quarter_1) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
-  let (:quarter_2) {Coin.create(diameter: 0.954, thickness: 0.069, weight: 5.671)}
-  let (:nickel) {Coin.create(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
-  let (:penny) {Coin.create(diameter: 0.751, weight: 2.500, thickness: 1.52)}
+  let (:dime_1) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_2) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:dime_3) {Coin.new(diameter: 0.705, weight: 2.269, thickness: 0.053)}
+  let (:quarter_1) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
+  let (:quarter_2) {Coin.new(diameter: 0.954, thickness: 0.069, weight: 5.671)}
+  let (:nickel) {Coin.new(diameter: 0.835, weight: 5.000, thickness: 0.1625)}
+  let (:penny) {Coin.new(diameter: 0.751, weight: 2.500, thickness: 1.52)}
 
   describe '#total' do
     it 'returns a value of 0 if no coins have been added' do
