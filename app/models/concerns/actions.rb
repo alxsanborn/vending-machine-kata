@@ -8,7 +8,7 @@ module Actions
 
   module ProductInstance
     def select_button
-      self.selected = true
+      self.selected = true if Product.product_selected? == nil
       self.save
     end
 

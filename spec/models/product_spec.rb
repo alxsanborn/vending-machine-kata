@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
 
   let (:cola) {Product.new(name: "cola", price: 1.00, product_image: File.new("app/assets/images/cola.jpeg"))}
+  let (:chips) {Product.new(name: "chips", price: 0.50)}
 
   context 'validations' do
     it 'can create a new product with name and price' do
@@ -18,7 +19,7 @@ RSpec.describe Product, type: :model do
       free_cheetos = Product.new(name: 'cheetos')
       expect(free_cheetos).to_not be_valid
     end
-    
+
     it 'can have an image' do
       allow_any_instance_of(Paperclip::Attachment).to receive(:save).and_return(true)
     end
@@ -38,6 +39,13 @@ RSpec.describe Product, type: :model do
     it 'user can select a product' do
       cola.select_button
       expect(cola.selected).to be(true)
+    end
+
+    it 'user cannot select more than one product' do
+      cola.select_button
+      chips.select_button
+      expect(cola.selected).to be(true)
+      expect(chips.selected).to be(false)
     end
   end
 
