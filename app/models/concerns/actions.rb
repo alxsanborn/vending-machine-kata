@@ -8,18 +8,15 @@ module Actions
 
   module ProductInstance
     def select_button
-      self.selected = true if Product.product_selected? == nil
-      self.save
+      self.update(selected: true) if Product.product_selected? == nil
     end
 
     def deselect_button
-      self.selected = false
-      self.save
+      self.update(selected: false)
     end
 
     def decrease_product_quantity
-      self.quantity -= 1
-      self.save
+      self.update(quantity: self.quantity - 1)
     end
   end
 
