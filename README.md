@@ -16,6 +16,8 @@ Thank you for taking the time to consider me as a candidate. Please find the "ne
   1. Initialize, create, and seed database by running 'rails db:create,' then 'rails db:migrate,' then 'rails db:seed' in the terminal.
   2. Run 'rails s' in the terminal to launch the server.
   3. Type in 'localhost:3000' in your browser's url.
-  4. I seeded it so there are 100 colas, 0 chips, and 5 candies.  
+  4. I seeded it so there are 100 colas, 0 chips, and 5 candies.
+
+* Note: I reset commits made between January 16-17, which is why it may look like I performed the same work twice. I did comment under each commit that was reset. 
 
   ![Homepage Screenshot](http://i64.tinypic.com/2uy52jt.png)
