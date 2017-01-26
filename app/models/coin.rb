@@ -39,26 +39,22 @@ class Coin < ApplicationRecord
   end
 
   def dime(user_coins)
-    user_coins.dimes += 1
-    user_coins.save
+    user_coins.update(dimes: user_coins.dimes + 1)
     @@all_valid_coins.push(self)
   end
 
   def nickel(user_coins)
-    user_coins.nickels += 1
-    user_coins.save
+    user_coins.update(nickels: user_coins.nickels + 1)
     @@all_valid_coins.push(self)
   end
 
   def quarter(user_coins)
-    user_coins.quarters += 1
-    user_coins.save
+    user_coins.update(quarters: user_coins.quarters + 1)
     @@all_valid_coins.push(self)
   end
 
   def penny(user_coins)
-    user_coins.pennies += 1
-    user_coins.save
+    user_coins.update(pennies: user_coins.pennies + 1)
   end
 
   def evaluate_coin_values(user_coins)
@@ -69,6 +65,4 @@ class Coin < ApplicationRecord
         end
       }
     end
-
-
 end
