@@ -4,7 +4,7 @@ Please find the "need to know" information below:
 
 * Written in Ruby 2.3.1p112 with Rails 5.0.1 framework
 
-* RSpec tests
+* RSpec unit tests
 
 * To install all dependencies, run 'bundle install' in the terminal. If you do not have Bundler installed, run 'gem install bundler' first.
 
