@@ -4,7 +4,7 @@ Please find the "need to know" information below:
 
 * Written in Ruby 2.3.1p112 with Rails 5.0.1 framework
 
-* RSpec tests
+* RSpec unit tests
 
 * To install all dependencies, run 'bundle install' in the terminal. If you do not have Bundler installed, run 'gem install bundler' first.
 
@@ -19,3 +19,5 @@ Please find the "need to know" information below:
 * Note: I reset commits made between January 16-17, which is why it may look like I performed the same work twice. I did comment under each commit that was reset. [I wrote a blog post about my mistake of not branching during this project.](https://medium.com/@alxsanborn/source-control-in-github-f8610fd306f3#.p51dmopih)
 
   ![Homepage Screenshot](http://i64.tinypic.com/2uy52jt.png)
+
+Thank you!
